@@ -5,50 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebChatApp_DB</title>
 
-  <script src="https://kit.fontawesome.com/068aaa22dc.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.min.css">
 </head>
 <body>
   <header>
     <h1>WebChatApp_DB</h1>
-    <div class="settings-btn">
+    <button class="settings-btn">
       <i class="fa-solid fa-gears"></i>
-    </div>
+    </button>
   </header>
   <main>
     <section class="friends-list">
       <div class="friend">
-        <p class="nickname">Marcin Grognałer</p>
-        <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        <span class="friend-text">
+          <p class="nickname">Marcin Grognałer</p>
+          <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        </span>
         <div class="profile-img">
-          <img src="../img/friend-1.jpg" alt="">
+          <img class="profile-photo" src="../img/friend-1.jpg" alt="">
         </div>
       </div>
       <div class="friend">
-        <p class="nickname">Marta Skura</p>
-        <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        <span class="friend-text">
+          <p class="nickname">Marta Skura</p>
+          <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        </span>
         <div class="profile-img">
-          <img src="../img/friend-2.jpg" alt="">
+          <img class="profile-photo" src="../img/friend-2.jpg" alt="">
         </div>
       </div>
       <div class="friend">
-        <p class="nickname">Marcinek Ściemniacz</p>
-        <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        <span class="friend-text">
+          <p class="nickname">Marcinek Ściemniacz</p>
+          <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        </span>
         <div class="profile-img">
-          <img src="../img/friend-3.jpg" alt="">
+          <img class="profile-photo" src="../img/friend-3.jpg" alt="">
         </div>
       </div>
     </section>
     <section class="chat-window">
       <div class="chat-header">
         <div class="profile-img">
-          <img src="../img/friend-1.jpg" alt="">
+          <img class="active profile-photo" src="../img/friend-1.jpg" alt="">
         </div>
         <p class="nickname">Marcin Grognałer</p>
+        <div class="status online active">
+          <div class="status-dot"></div>
+          <p class="status-txt">Active</p>
+        </div>
+        <div class="status offline">
+          <div class="status-dot "></div>
+          <p class="status-txt">No active</p>
+        </div>
       </div>
       <div class="chat">
-        <div class="message">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <div class="message user-mess">
+          <p>Lorem1 ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
+        <div class="message friend-mess">
+          <p>Lorem2 ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+      </div>
+      <div class="write-area">
+        <textarea id="write-mess" placeholder="Wriete message" cols="30" rows="2"></textarea>
+        <button id="send">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
       </div>
     </section>
   </main>
