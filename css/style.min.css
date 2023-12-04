@@ -39,7 +39,6 @@ header {
           align-items: center;
   overflow: hidden;
 }
-
 header h1 {
   position: absolute;
   top: 50%;
@@ -48,8 +47,7 @@ header h1 {
           transform: translate(-50%, -50%);
   display: inline-block;
 }
-
-button.settings-btn {
+header button.settings-btn {
   position: absolute;
   top: 50%;
   right: 0.5%;
@@ -63,16 +61,13 @@ button.settings-btn {
   background-color: #999;
   overflow: hidden;
 }
-
-button.settings-btn:hover {
+header button.settings-btn:hover {
   background-color: #777;
 }
-
-button.settings-btn:active {
+header button.settings-btn:active {
   background-color: red;
 }
-
-.settings-btn i {
+header button.settings-btn i {
   font-size: 38px;
   color: #fff;
 }
@@ -83,16 +78,42 @@ main {
   width: 100vw;
   overflow: hidden;
 }
-
-main .friends-list {
+main menu {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: -15vw;
+  height: 40vh;
+  width: 15vw;
+  border: 2px solid #000;
+  background-color: #ade;
+  -webkit-transition: all 0.75s ease;
+  transition: all 0.75s ease;
+}
+main menu.active {
+  right: 0;
+}
+main menu li.option {
+  display: block;
+  height: 15%;
+  width: 100%;
+  padding: 5%;
+  border-bottom: 1px solid #000;
+  text-align: center;
+  font-size: 20px;
+}
+main menu li.option:hover {
+  background-color: #bef;
+  font-size: 22px;
+}
+main section.friends-list {
   display: inline-block;
   width: 30%;
   height: 100%;
   padding: 1.5vw;
   background-color: aqua;
 }
-
-.friends-list div.friend {
+main section.friends-list div.friend {
   position: relative;
   height: 15%;
   width: 100%;
@@ -101,8 +122,7 @@ main .friends-list {
   margin-bottom: 1vh;
   overflow: hidden;
 }
-
-.friends-list .friend span.friend-text {
+main section.friends-list div.friend span.friend-text {
   position: absolute;
   top: 50%;
   left: 2%;
@@ -115,18 +135,15 @@ main .friends-list {
   margin-right: 2%;
   overflow: hidden;
 }
-
-.friends-list .friend .friend-text p {
+main section.friends-list div.friend span.friend-text p {
   height: 20px;
 }
-
-.friends-list .friend .friend-text p.nickname {
+main section.friends-list div.friend span.friend-text p.nickname {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 1.5%;
 }
-
-.friends-list .friend div.profile-img {
+main section.friends-list div.friend div.profile-img {
   position: absolute;
   top: 50%;
   right: 2%;
@@ -135,8 +152,7 @@ main .friends-list {
   display: inline-block;
   height: 90%;
 }
-
-main .chat-window {
+main section.chat-window {
   position: relative;
   display: inline-block;
   position: absolute;
@@ -148,8 +164,7 @@ main .chat-window {
   margin: 3% 15% 3% 3vw;
   overflow: hidden;
 }
-
-.chat-window div.chat-header {
+main section.chat-window div.chat-header {
   position: absolute;
   top: 0;
   left: 0;
@@ -158,12 +173,10 @@ main .chat-window {
   padding: 0.3%;
   background-color: #ddd;
 }
-
-.chat-window .chat-header div.profile-img {
+main section.chat-window div.chat-header div.profile-img {
   height: 95%;
 }
-
-.chat-window .chat-header p.nickname {
+main section.chat-window div.chat-header p.nickname {
   position: absolute;
   top: 45%;
   -webkit-transform: translate(0, -50%);
@@ -174,8 +187,7 @@ main .chat-window {
   font-size: 25px;
   font-weight: 700;
 }
-
-.chat-window .chat-header div.status {
+main section.chat-window div.chat-header div.status {
   position: absolute;
   top: 55%;
   display: none;
@@ -185,33 +197,27 @@ main .chat-window {
   font-size: 18px;
   font-weight: 400;
 }
-
-.chat-window .chat-header div.status.active {
+main section.chat-window div.chat-header div.status.active {
   display: inline-block;
 }
-
-.chat-window .chat-header .status div.status-dot {
+main section.chat-window div.chat-header div.status div.status-dot {
   display: inline-block;
   aspect-ratio: 1/1;
   height: 38%;
   border-radius: 50%;
 }
-
-.chat-window .chat-header .status.online div.status-dot {
+main section.chat-window div.chat-header div.status.online div.status-dot {
   background-color: green;
 }
-
-.chat-window .chat-header .status.offline div.status-dot {
+main section.chat-window div.chat-header div.status.offline div.status-dot {
   background-color: red;
 }
-
-.chat-window .chat-header .status p.status-txt {
+main section.chat-window div.chat-header div.status p.status-txt {
   display: inline-block;
   height: 40%;
   width: 50%;
 }
-
-.chat-window div.chat {
+main section.chat-window div.chat {
   position: absolute;
   top: 12%;
   left: 0;
@@ -226,8 +232,7 @@ main .chat-window {
   width: 100%;
   padding: 2%;
 }
-
-.chat-window .chat .message {
+main section.chat-window div.chat div.message {
   height: 8%;
   width: auto;
   border: 1px solid #ddd;
@@ -235,22 +240,18 @@ main .chat-window {
   padding: 0.5% 1%;
   margin: 2% 1%;
 }
-
-.chat-window .chat .message.user-mess {
+main section.chat-window div.chat div.message.user-mess {
   margin-left: 15%;
   background-color: tan;
 }
-
-.chat-window .chat .message.friend-mess {
+main section.chat-window div.chat div.message.friend-mess {
   margin-right: 15%;
   background-color: salmon;
 }
-
-.chat-window .chat .message p {
+main section.chat-window div.chat div.message p {
   width: 100%;
 }
-
-.chat-window div.write-area {
+main section.chat-window div.write-area {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -258,8 +259,7 @@ main .chat-window {
   width: 100%;
   border: 1px solid #000;
 }
-
-.chat-window .write-area textarea#write-mess {
+main section.chat-window div.write-area textarea#write-mess {
   position: absolute;
   top: 50%;
   left: 0;
@@ -272,8 +272,7 @@ main .chat-window {
   margin: 0 0.75%;
   background-color: #eee;
 }
-
-.chat-window .write-area #send {
+main section.chat-window div.write-area #sendBtn {
   position: absolute;
   top: 50%;
   right: 0;
@@ -284,8 +283,7 @@ main .chat-window {
   border-radius: 50%;
   margin-right: 1%;
 }
-
-.chat-window .write-area #send i {
+main section.chat-window div.write-area #sendBtn i {
   font-size: 25px;
 }
 
@@ -295,7 +293,6 @@ footer {
   background-color: #ddd;
   overflow: hidden;
 }
-
 footer p {
   position: absolute;
   top: 50%;
