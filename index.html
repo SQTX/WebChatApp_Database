@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./css/style.min.css">
 </head>
 <body>
@@ -19,6 +20,10 @@
     </button>
   </header>
   <main>
+    <menu>
+      <li class="option">Dodaj użytkownika</li>
+      <li class="option">Wyświetl logi</li>
+    </menu>
     <section class="friends-list">
       <div class="friend">
         <span class="friend-text">
@@ -73,7 +78,7 @@
       </div>
       <div class="write-area">
         <textarea id="write-mess" placeholder="Wriete message" cols="30" rows="2"></textarea>
-        <button id="send">
+        <button id="sendBtn">
           <i class="fa-solid fa-paper-plane"></i>
         </button>
       </div>
@@ -82,5 +87,6 @@
   <footer>
     <p class="credits">University project created by Konrad Krzysztoszek & Jakub Sitarczyk</p>
   </footer>
+  <script src="js/main.js"></script>
 </body>
 </html>
