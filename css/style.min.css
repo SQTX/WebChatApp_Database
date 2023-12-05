@@ -63,6 +63,7 @@ header button.settings-btn {
 }
 header button.settings-btn:hover {
   background-color: #777;
+  cursor: pointer;
 }
 header button.settings-btn:active {
   background-color: red;
@@ -105,6 +106,7 @@ main menu li.option {
 main menu li.option:hover {
   background-color: #bef;
   font-size: 22px;
+  cursor: pointer;
 }
 main section.friends-list {
   display: inline-block;
@@ -121,6 +123,10 @@ main section.friends-list div.friend {
   border-radius: 10px;
   margin-bottom: 1vh;
   overflow: hidden;
+}
+main section.friends-list div.friend:hover {
+  background-color: lightblue;
+  cursor: pointer;
 }
 main section.friends-list div.friend span.friend-text {
   position: absolute;
@@ -225,31 +231,45 @@ main section.chat-window div.chat {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: safe end;
+      -ms-flex-pack: safe end;
+          justify-content: safe end;
   height: 74%;
   width: 100%;
   padding: 2%;
+  overflow-y: scroll;
 }
 main section.chat-window div.chat div.message {
-  height: 8%;
-  width: auto;
+  min-height: 8%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 90%;
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 0.5% 1%;
-  margin: 2% 1%;
+  margin: 1%;
+  overflow: hidden;
 }
 main section.chat-window div.chat div.message.user-mess {
   margin-left: 15%;
   background-color: tan;
+  -ms-flex-item-align: end;
+      align-self: end;
 }
 main section.chat-window div.chat div.message.friend-mess {
   margin-right: 15%;
   background-color: salmon;
+  -ms-flex-item-align: normal;
+      align-self: normal;
 }
 main section.chat-window div.chat div.message p {
+  height: 100%;
   width: 100%;
+  word-wrap: break-word;
 }
 main section.chat-window div.write-area {
   position: absolute;
@@ -272,6 +292,9 @@ main section.chat-window div.write-area textarea#write-mess {
   margin: 0 0.75%;
   background-color: #eee;
 }
+main section.chat-window div.write-area textarea#write-mess:hover {
+  cursor: text;
+}
 main section.chat-window div.write-area #sendBtn {
   position: absolute;
   top: 50%;
@@ -282,6 +305,9 @@ main section.chat-window div.write-area #sendBtn {
   height: 76%;
   border-radius: 50%;
   margin-right: 1%;
+}
+main section.chat-window div.write-area #sendBtn:hover {
+  cursor: pointer;
 }
 main section.chat-window div.write-area #sendBtn i {
   font-size: 25px;
@@ -301,4 +327,37 @@ footer p {
           transform: translate(-50%, -50%);
   -ms-flex-line-pack: center;
       align-content: center;
+}
+
+section#terminal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 60vh;
+  width: 60vw;
+  border: 2px solid gray;
+  background-color: #000;
+}
+section#terminal.active {
+  display: block;
+}
+section#terminal div.header-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4%;
+  width: 100%;
+  background-color: gray;
+}
+section#terminal div.header-bar button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 95%;
+  width: 2.5%;
+  border: 1 solid black;
+  background-color: transparent;
 }/*# sourceMappingURL=style.min.css.map */

@@ -60,6 +60,7 @@ header {
 
     &:hover {
       background-color: #777;
+      cursor: pointer;
     }
 
     &:active {
@@ -107,6 +108,7 @@ main {
       &:hover {
         background-color: #bef;
         font-size: 22px;
+        cursor: pointer;
       }
     }
   }
@@ -129,6 +131,11 @@ main {
       border-radius: 10px;
       margin-bottom: 1vh;
       overflow: hidden;
+
+      &:hover {
+        background-color: lightblue;
+        cursor: pointer;
+      }
 
       span.friend-text {
         position: absolute;
@@ -244,32 +251,39 @@ main {
       top: 12%;
       left: 0;
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
+      justify-content: safe end;  // safe enables scrolling
       height: 74%;
       width: 100%;
       padding: 2%;
+      overflow-y: scroll;
 
       div.message {
-        height: 8%;
-        width: auto;
-        // width: 80%;
+        min-height: 8%;
+        width: fit-content;
+        max-width: 90%;
         border: 1px solid #ddd;
         border-radius: 12px;
         padding: 0.5% 1%;
-        margin: 2% 1%;
+        margin: 1%;
+        overflow: hidden;
 
         &.user-mess {
           margin-left: 15%;
           background-color: tan;
+          align-self: end;
         }
 
         &.friend-mess {
           margin-right: 15%;
           background-color: salmon;
+          align-self: normal;
         }
 
         p {
+          height: 100%;
           width: 100%;
+          word-wrap:break-word;
         }
       }
     }
@@ -293,6 +307,10 @@ main {
         border-radius: 15px;
         margin: 0 0.75%;
         background-color: #eee;
+
+        &:hover {
+          cursor: text;
+        }
       }
 
       #sendBtn {
@@ -304,6 +322,10 @@ main {
         height: 76%;
         border-radius: 50%;
         margin-right: 1%;
+
+        &:hover {
+          cursor: pointer;
+        }
 
         i {
           font-size: 25px;
@@ -326,5 +348,40 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
     align-content: center;
+  }
+}
+
+section#terminal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60vh;
+  width: 60vw;
+  border: 2px solid gray;
+  background-color: #000;
+
+  &.active {
+    display: block;
+  }
+
+  div.header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4%;
+    width: 100%;
+    background-color: gray;
+
+    button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 95%;
+      width: 2.5%;
+      border: 1 solid black;
+      background-color: transparent;
+    }
   }
 }
