@@ -1,0 +1,14 @@
+{
+  "name": "webchatapp_database",
+  "version": "1.0.0",
+  "description": "Project of a WebChat with database system for classes at the Wrocław University of Science and Technology",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jakub SQTX Sitarczyk",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
