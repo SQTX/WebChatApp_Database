@@ -1,0 +1,367 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+div.profile-img {
+  display: inline-block;
+  aspect-ratio: 1/1;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-img img {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  color: #000;
+  overflow: hidden;
+}
+
+header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8vh;
+  background-color: #ddd;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+header h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: inline-block;
+}
+header button.settings-btn {
+  position: absolute;
+  top: 50%;
+  right: 0.5%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: inline-block;
+  aspect-ratio: 1/1;
+  height: 70%;
+  border-radius: 50%;
+  border-width: 0;
+  background-color: #999;
+  overflow: hidden;
+}
+header button.settings-btn:hover {
+  background-color: #777;
+  cursor: pointer;
+}
+header button.settings-btn:active {
+  background-color: red;
+}
+header button.settings-btn i {
+  font-size: 38px;
+  color: #fff;
+}
+
+main {
+  position: relative;
+  height: 85vh;
+  width: 100vw;
+  overflow: hidden;
+}
+main menu {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: -15vw;
+  height: 40vh;
+  width: 15vw;
+  border: 2px solid #000;
+  background-color: #ade;
+  -webkit-transition: all 0.75s ease;
+  transition: all 0.75s ease;
+}
+main menu.active {
+  right: 0;
+}
+main menu li.option {
+  display: block;
+  height: 15%;
+  width: 100%;
+  padding: 5%;
+  border-bottom: 1px solid #000;
+  text-align: center;
+  font-size: 20px;
+}
+main menu li.option:hover {
+  background-color: #bef;
+  font-size: 22px;
+  cursor: pointer;
+}
+main section.friends-list {
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+  padding: 1.5vw;
+  background-color: aqua;
+  overflow-y: scroll;
+}
+main section.friends-list div.friend {
+  position: relative;
+  height: 15%;
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin-bottom: 1vh;
+  overflow: hidden;
+}
+main section.friends-list div.friend:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+main section.friends-list div.friend span.friend-text {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  display: inline-block;
+  height: 70%;
+  width: 70%;
+  padding: 3% 3%;
+  margin-right: 2%;
+  overflow: hidden;
+}
+main section.friends-list div.friend span.friend-text p {
+  height: 20px;
+}
+main section.friends-list div.friend span.friend-text p.nickname {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 1.5%;
+}
+main section.friends-list div.friend div.profile-img {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  display: inline-block;
+  height: 90%;
+}
+main section.chat-window {
+  position: relative;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  width: 50%;
+  height: 90%;
+  border: 2px solid #000;
+  border-radius: 15px;
+  margin: 3% 15% 3% 3vw;
+  overflow: hidden;
+}
+main section.chat-window div.chat-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 12%;
+  width: 100%;
+  padding: 0.3%;
+  background-color: #ddd;
+}
+main section.chat-window div.chat-header div.profile-img {
+  height: 95%;
+}
+main section.chat-window div.chat-header p.nickname {
+  position: absolute;
+  top: 45%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  display: inline-block;
+  height: 50%;
+  margin-left: 2%;
+  font-size: 25px;
+  font-weight: 700;
+}
+main section.chat-window div.chat-header div.status {
+  position: absolute;
+  top: 55%;
+  display: none;
+  height: 50%;
+  width: 50%;
+  margin-left: 2%;
+  font-size: 18px;
+  font-weight: 400;
+}
+main section.chat-window div.chat-header div.status.active {
+  display: inline-block;
+}
+main section.chat-window div.chat-header div.status div.status-dot {
+  display: inline-block;
+  aspect-ratio: 1/1;
+  height: 38%;
+  border-radius: 50%;
+}
+main section.chat-window div.chat-header div.status.online div.status-dot {
+  background-color: green;
+}
+main section.chat-window div.chat-header div.status.offline div.status-dot {
+  background-color: red;
+}
+main section.chat-window div.chat-header div.status p.status-txt {
+  display: inline-block;
+  height: 40%;
+  width: 50%;
+}
+main section.chat-window div.chat {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: safe end;
+      -ms-flex-pack: safe end;
+          justify-content: safe end;
+  height: 74%;
+  width: 100%;
+  padding: 2%;
+  overflow-y: scroll;
+}
+main section.chat-window div.chat div.message {
+  min-height: 8%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 90%;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 0.5% 1%;
+  margin: 1%;
+  overflow: hidden;
+}
+main section.chat-window div.chat div.message.user-mess {
+  margin-left: 15%;
+  background-color: tan;
+  -ms-flex-item-align: end;
+      align-self: end;
+}
+main section.chat-window div.chat div.message.friend-mess {
+  margin-right: 15%;
+  background-color: salmon;
+  -ms-flex-item-align: normal;
+      align-self: normal;
+}
+main section.chat-window div.chat div.message p {
+  height: 100%;
+  width: 100%;
+  word-wrap: break-word;
+}
+main section.chat-window div.write-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 12%;
+  width: 100%;
+  border: 1px solid #000;
+}
+main section.chat-window div.write-area textarea#write-mess {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  height: 90%;
+  width: 90%;
+  padding: 1.75%;
+  border-radius: 15px;
+  margin: 0 0.75%;
+  background-color: #eee;
+}
+main section.chat-window div.write-area textarea#write-mess:hover {
+  cursor: text;
+}
+main section.chat-window div.write-area button#sendBtn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  aspect-ratio: 1/1;
+  height: 76%;
+  border-radius: 50%;
+  margin-right: 1%;
+}
+main section.chat-window div.write-area button#sendBtn:hover {
+  cursor: pointer;
+}
+main section.chat-window div.write-area button#sendBtn:active {
+  background-color: #ccc;
+}
+main section.chat-window div.write-area button#sendBtn i {
+  font-size: 25px;
+}
+
+footer {
+  position: relative;
+  height: 7vh;
+  background-color: #ddd;
+  overflow: hidden;
+}
+footer p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+section#terminal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 60vh;
+  width: 60vw;
+  border: 2px solid gray;
+  background-color: #000;
+}
+section#terminal.active {
+  display: block;
+}
+section#terminal div.header-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4%;
+  width: 100%;
+  background-color: gray;
+}
+section#terminal div.header-bar button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 95%;
+  width: 2.5%;
+  border: 1 solid black;
+  background-color: transparent;
+}/*# sourceMappingURL=style.min.css.map */
