@@ -72,3 +72,49 @@ function getUserFromServer() {
 }
 
 getUserFromServer();
+
+
+// **********************************************************************
+
+async function printMessages(chat, data, userID){
+  let message = document.createElement("p");
+  message.innerText = data.messageTxt;
+
+
+  let messBubble = document.createElement("div");
+  messBubble.classList.add("message");
+  const authorID = data.authorID;
+  if(userID === authorID) {
+    messBubble.classList.add("user-mess");
+  }else {
+    messBubble.classList.add("friend-mess");
+  }
+
+  messBubble.appendChild(message);
+  await chat.appendChild(messBubble);
+
+  // Automatic scroll down:
+  messBubble.scrollIntoView();
+  messBubble.scrollIntoView({behavior: "smooth"});
+}
+
+const maxLimit = 5;
+const userID = "Daniel";
+const chat = document.getElementById("chat");
+
+async function getInboxSize() {
+  await fetch(`/chat/Marcin/size`, {
+      method: 'GET',
+  }).then(r => r.json().then(data => loadChat(data.inboxSize)))
+}
+
+async function loadChat(maxLimit) {
+  for(let i = 0; i < maxLimit; i++) {
+    await fetch(`/chat/Marcin/mess${i+1}`, {
+      method: 'GET',
+    })
+    .then(r => r.json().then((data) => printMessages(chat, data, userID)))
+  }
+}
+
+getInboxSize();
