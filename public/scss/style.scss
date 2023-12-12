@@ -17,6 +17,9 @@ div.profile-img {
   width: 100%;
 }
 
+$bar-color: rgb(241, 199, 120);
+$otherElem-color: rgb(200, 104, 221);
+
 body {
   height: 100vh;
   width: 100vw;
@@ -33,7 +36,7 @@ header {
   left: 0;
   width: 100%;
   height: 8vh;
-  background-color: #ddd;
+  background-color: $bar-color;
   align-items: center;
   overflow: hidden;
 
@@ -55,7 +58,7 @@ header {
     height: 70%;
     border-radius: 50%;
     border-width: 0;
-    background-color: #999;
+    background-color: $otherElem-color;
     overflow: hidden;
 
     &:hover {
@@ -118,7 +121,7 @@ main {
     width: 30%;
     height: 100%;
     padding: 1.5vw;
-    background-color: aqua;
+    background-color: $otherElem-color;
     overflow-y: scroll;
 
     div.friend {
@@ -141,8 +144,8 @@ main {
         left: 2%;
         transform: translate(0, -50%);
         display: inline-block;
-        height: 70%;
-        width: 70%;
+        height: 85%;
+        width: 75%;
         padding: 3% 3%;
         margin-right: 2%;
         overflow: hidden;
@@ -154,7 +157,7 @@ main {
         p.nickname {
           font-size: 20px;
           font-weight: 700;
-          margin-bottom: 1.5%;
+          margin-bottom: 1.7%;
         }
       }
 
@@ -268,13 +271,13 @@ main {
 
         &.user-mess {
           margin-left: 15%;
-          background-color: tan;
+          background-color: rgb(108, 141, 240);
           align-self: end;
         }
 
         &.friend-mess {
           margin-right: 15%;
-          background-color: salmon;
+          background-color: #ccc;
           align-self: normal;
         }
 
@@ -305,6 +308,8 @@ main {
         border-radius: 15px;
         margin: 0 0.75%;
         background-color: #eee;
+        font-family: "Lato", "Helvetica", "Arial", sans-serif;
+        font-size: 14px;
 
         &:hover {
           cursor: text;
@@ -318,6 +323,7 @@ main {
         transform: translate(0, -50%);
         aspect-ratio: 1 / 1;
         height: 76%;
+        border: 2px solid black;
         border-radius: 50%;
         margin-right: 1%;
 
@@ -326,6 +332,7 @@ main {
         }
 
         &:active {
+          border-color: royalblue;
           background-color: #ccc;
         }
 
@@ -341,7 +348,7 @@ main {
 footer {
   position: relative;
   height: 7vh;
-  background-color: #ddd;
+  background-color: $bar-color;
   overflow: hidden;
 
   p {
