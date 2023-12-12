@@ -47,7 +47,7 @@ header h1 {
           transform: translate(-50%, -50%);
   display: inline-block;
 }
-header button.settings-btn {
+header button#settings-btn {
   position: absolute;
   top: 50%;
   right: 0.5%;
@@ -61,14 +61,14 @@ header button.settings-btn {
   background-color: #999;
   overflow: hidden;
 }
-header button.settings-btn:hover {
+header button#settings-btn:hover {
   background-color: #777;
   cursor: pointer;
 }
-header button.settings-btn:active {
+header button#settings-btn:active {
   background-color: red;
 }
-header button.settings-btn i {
+header button#settings-btn i {
   font-size: 38px;
   color: #fff;
 }
@@ -108,7 +108,7 @@ main menu li.option:hover {
   font-size: 22px;
   cursor: pointer;
 }
-main section.friends-list {
+main section#friends-list {
   display: inline-block;
   width: 30%;
   height: 100%;
@@ -116,7 +116,7 @@ main section.friends-list {
   background-color: aqua;
   overflow-y: scroll;
 }
-main section.friends-list div.friend {
+main section#friends-list div.friend {
   position: relative;
   height: 15%;
   width: 100%;
@@ -125,11 +125,11 @@ main section.friends-list div.friend {
   margin-bottom: 1vh;
   overflow: hidden;
 }
-main section.friends-list div.friend:hover {
+main section#friends-list div.friend:hover {
   background-color: lightblue;
   cursor: pointer;
 }
-main section.friends-list div.friend span.friend-text {
+main section#friends-list div.friend span.friend-text {
   position: absolute;
   top: 50%;
   left: 2%;
@@ -142,15 +142,15 @@ main section.friends-list div.friend span.friend-text {
   margin-right: 2%;
   overflow: hidden;
 }
-main section.friends-list div.friend span.friend-text p {
+main section#friends-list div.friend span.friend-text p {
   height: 20px;
 }
-main section.friends-list div.friend span.friend-text p.nickname {
+main section#friends-list div.friend span.friend-text p.nickname {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 1.5%;
 }
-main section.friends-list div.friend div.profile-img {
+main section#friends-list div.friend div.profile-img {
   position: absolute;
   top: 50%;
   right: 2%;
@@ -159,7 +159,7 @@ main section.friends-list div.friend div.profile-img {
   display: inline-block;
   height: 90%;
 }
-main section.chat-window {
+main section#chat-window {
   position: relative;
   display: inline-block;
   position: absolute;
@@ -171,7 +171,7 @@ main section.chat-window {
   margin: 3% 15% 3% 3vw;
   overflow: hidden;
 }
-main section.chat-window div.chat-header {
+main section#chat-window div#chat-header {
   position: absolute;
   top: 0;
   left: 0;
@@ -180,10 +180,10 @@ main section.chat-window div.chat-header {
   padding: 0.3%;
   background-color: #ddd;
 }
-main section.chat-window div.chat-header div.profile-img {
+main section#chat-window div#chat-header div.profile-img {
   height: 95%;
 }
-main section.chat-window div.chat-header p.nickname {
+main section#chat-window div#chat-header p.nickname {
   position: absolute;
   top: 45%;
   -webkit-transform: translate(0, -50%);
@@ -194,7 +194,7 @@ main section.chat-window div.chat-header p.nickname {
   font-size: 25px;
   font-weight: 700;
 }
-main section.chat-window div.chat-header div.status {
+main section#chat-window div#chat-header div.status {
   position: absolute;
   top: 55%;
   display: none;
@@ -204,27 +204,27 @@ main section.chat-window div.chat-header div.status {
   font-size: 18px;
   font-weight: 400;
 }
-main section.chat-window div.chat-header div.status.active {
+main section#chat-window div#chat-header div.status.active {
   display: inline-block;
 }
-main section.chat-window div.chat-header div.status div.status-dot {
+main section#chat-window div#chat-header div.status div.status-dot {
   display: inline-block;
   aspect-ratio: 1/1;
   height: 38%;
   border-radius: 50%;
 }
-main section.chat-window div.chat-header div.status.online div.status-dot {
+main section#chat-window div#chat-header div.status.online div.status-dot {
   background-color: green;
 }
-main section.chat-window div.chat-header div.status.offline div.status-dot {
+main section#chat-window div#chat-header div.status.offline div.status-dot {
   background-color: red;
 }
-main section.chat-window div.chat-header div.status p.status-txt {
+main section#chat-window div#chat-header div.status p.status-txt {
   display: inline-block;
   height: 40%;
   width: 50%;
 }
-main section.chat-window div.chat {
+main section#chat-window div#chat {
   position: absolute;
   top: 12%;
   left: 0;
@@ -243,7 +243,7 @@ main section.chat-window div.chat {
   padding: 2%;
   overflow-y: scroll;
 }
-main section.chat-window div.chat div.message {
+main section#chat-window div#chat div.message {
   min-height: 8%;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -255,24 +255,24 @@ main section.chat-window div.chat div.message {
   margin: 1%;
   overflow: hidden;
 }
-main section.chat-window div.chat div.message.user-mess {
+main section#chat-window div#chat div.message.user-mess {
   margin-left: 15%;
   background-color: tan;
   -ms-flex-item-align: end;
       align-self: end;
 }
-main section.chat-window div.chat div.message.friend-mess {
+main section#chat-window div#chat div.message.friend-mess {
   margin-right: 15%;
   background-color: salmon;
   -ms-flex-item-align: normal;
       align-self: normal;
 }
-main section.chat-window div.chat div.message p {
+main section#chat-window div#chat div.message p {
   height: 100%;
   width: 100%;
   word-wrap: break-word;
 }
-main section.chat-window div.write-area {
+main section#chat-window div#write-area {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -280,7 +280,7 @@ main section.chat-window div.write-area {
   width: 100%;
   border: 1px solid #000;
 }
-main section.chat-window div.write-area textarea#write-mess {
+main section#chat-window div#write-area textarea#write-mess {
   position: absolute;
   top: 50%;
   left: 0;
@@ -293,10 +293,10 @@ main section.chat-window div.write-area textarea#write-mess {
   margin: 0 0.75%;
   background-color: #eee;
 }
-main section.chat-window div.write-area textarea#write-mess:hover {
+main section#chat-window div#write-area textarea#write-mess:hover {
   cursor: text;
 }
-main section.chat-window div.write-area button#sendBtn {
+main section#chat-window div#write-area button#sendBtn {
   position: absolute;
   top: 50%;
   right: 0;
@@ -307,13 +307,13 @@ main section.chat-window div.write-area button#sendBtn {
   border-radius: 50%;
   margin-right: 1%;
 }
-main section.chat-window div.write-area button#sendBtn:hover {
+main section#chat-window div#write-area button#sendBtn:hover {
   cursor: pointer;
 }
-main section.chat-window div.write-area button#sendBtn:active {
+main section#chat-window div#write-area button#sendBtn:active {
   background-color: #ccc;
 }
-main section.chat-window div.write-area button#sendBtn i {
+main section#chat-window div#write-area button#sendBtn i {
   font-size: 25px;
 }
 

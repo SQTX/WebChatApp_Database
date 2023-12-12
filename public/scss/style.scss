@@ -45,7 +45,7 @@ header {
     display: inline-block;
   }
 
-  button.settings-btn {
+  button#settings-btn {
     position: absolute;
     top: 50%;
     right: 0.5%;
@@ -113,7 +113,7 @@ main {
     }
   }
 
-  section.friends-list {
+  section#friends-list {
     display: inline-block;
     width: 30%;
     height: 100%;
@@ -169,7 +169,7 @@ main {
     }
   }
 
-  section.chat-window {
+  section#chat-window {
     position: relative;
     display: inline-block;
     position: absolute;
@@ -182,7 +182,7 @@ main {
     margin: 3% 15% 3% 3vw;
     overflow: hidden;
 
-    div.chat-header {
+    div#chat-header {
       position: absolute;
       top: 0;
       left: 0;
@@ -244,7 +244,7 @@ main {
       }
     }
 
-    div.chat {
+    div#chat {
       position: absolute;
       top: 12%;
       left: 0;
@@ -286,7 +286,7 @@ main {
       }
     }
 
-    div.write-area {
+    div#write-area {
       position: absolute;
       bottom: 0;
       left: 0;

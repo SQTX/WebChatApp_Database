@@ -15,7 +15,7 @@
 <body>
   <header>
     <h1>WebChatApp_DB</h1>
-    <button class="settings-btn">
+    <button id="settings-btn">
       <i class="fa-solid fa-gears"></i>
     </button>
   </header>
@@ -24,7 +24,7 @@
       <li class="option">Dodaj użytkownika</li>
       <li class="option">Wyświetl logi</li>
     </menu>
-    <section class="friends-list">
+    <section id="friends-list">
       <div class="friend">
         <span class="friend-text">
           <p class="nickname">Marcin Grognałer</p>
@@ -53,8 +53,8 @@
         </div>
       </div>
     </section>
-    <section class="chat-window">
-      <div class="chat-header">
+    <section id="chat-window">
+      <div id="chat-header">
         <div class="profile-img">
           <img class="active profile-photo" src="img/friend-1.jpg" alt="">
         </div>
@@ -68,7 +68,7 @@
           <p class="status-txt">No active</p>
         </div>
       </div>
-      <div class="chat">
+      <div id="chat">
         <div class="message user-mess">
           <p>Lorem1 ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
@@ -76,7 +76,7 @@
           <p>Lorem2 ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
       </div>
-      <div class="write-area">
+      <div id="write-area">
         <textarea id="write-mess" placeholder="Wriete message" cols="30" rows="2"></textarea>
         <button id="sendBtn">
           <i class="fa-solid fa-paper-plane"></i>
@@ -94,6 +94,6 @@
     </div>
     <div class="print-area"></div>
   </section>
-  <script type="module" src="js/index.js"></script>
+  <script type="module" src="js/script.js"></script>
 </body>
 </html>
