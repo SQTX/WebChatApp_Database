@@ -1,6 +1,6 @@
 // Includes:
 import {openTerminal} from "./terminal.js";
-// import {addNewMessage} from "./messSys.js";
+import {addNewMessage} from "./messSys.js";
 
 
 // *****************************************************************************
@@ -19,3 +19,30 @@ settingsBtn.addEventListener("click", () => {
 
 
 // *****************************************************************************
+// Add new message:
+const itsMyMess = true;   // TODO: To remove
+
+const sendBtn = document.getElementById("sendBtn");
+const chatTextArea = document.getElementById("write-mess");
+// Send Button detector:
+sendBtn.addEventListener("click", () => {
+  let messTxt = chatTextArea.value;
+  chatTextArea.value = "";          // Clean textarea
+  // If it's empty do nothing:
+  if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
+
+  addNewMessage(itsMyMess, messTxt);
+});
+// Enter in textArea detector:
+chatTextArea.addEventListener("keyup", (event) => {
+  if(event.key === "Enter") {
+    let messTxt = chatTextArea.value;
+    chatTextArea.value = "";          // Clean textarea
+    // If it's empty do nothing:
+    if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
+    addNewMessage(itsMyMess, messTxt);
+  };
+})
+
+// *****************************************************************************
+
