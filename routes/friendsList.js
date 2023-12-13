@@ -1,40 +1,4 @@
-const users = [
-    {
-      "userID": "1",
-      "firstName": "Marcin",
-      "lastName": "Grognałer",
-      "profilePhoto": "friend-1.jpg",
-      "email": "BiutiBlondi@wp.pl",
-      "password": "RealMarditPL",
-    },
-
-    {
-      "userID": "2",
-      "firstName": "Marta",
-      "lastName": "Skura",
-      "profilePhoto": "friend-2.jpg",
-      "email": "taxiNova@onet.com",
-      "password": "MiroGosc123",
-    },
-
-    {
-      "userID": "3",
-      "firstName": "Marcinek",
-      "lastName": "Ściemniacz",
-      "profilePhoto": "friend-3.jpg",
-      "email": "mikolajekCzar@gmail.com",
-      "password": "dupa123",
-    },
-
-    {
-      "userID": "4",
-      "firstName": "Bob",
-      "lastName": "Budowaniczy",
-      "profilePhoto": "",
-      "email": "mikolajekCzar@gmail.com",
-      "password": "dupa123",
-    },
-  ]
+const {users} = require("./test_db");
 
 function friendsList(app, path) {
   // Send friends number:

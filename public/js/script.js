@@ -1,6 +1,6 @@
 // Includes:
 import {openTerminal} from "./terminal.js";
-import {addNewMessage} from "./messSys.js";
+import {loadChatHeader, addNewMessage} from "./messSys.js";
 
 // *****************************************************************************
 // Delay:
@@ -59,6 +59,8 @@ delay(300).then(() => {
       const nicknameP = friend.querySelector("span p.nickname");
       const nickname = nicknameP.innerText;
       console.log("Przyjaciel", nickname);
+
+      // TODO: fetch do konwersacji {load: header, messages}
     })
   });
 });
