@@ -75,6 +75,8 @@ getUserFromServer();
 
 
 // **********************************************************************
+import {loadChatHeader} from "./messSys.js";
+loadChatHeader("Szalony Marcinek", true, "img/friend-3.jpg");
 
 async function printMessages(chat, data, userID){
   let message = document.createElement("p");
@@ -102,13 +104,7 @@ const maxLimit = 5;
 const userID = "Daniel";
 const chat = document.getElementById("chat");
 
-async function getInboxSize() {
-  await fetch(`/chat/Marcin/size`, {
-      method: 'GET',
-  }).then(r => r.json().then(data => loadChat(data.inboxSize)))
-}
-
-async function loadChat(maxLimit) {
+async function loadMessages(maxLimit) {
   for(let i = 0; i < maxLimit; i++) {
     await fetch(`/chat/Marcin/mess${i+1}`, {
       method: 'GET',
@@ -117,4 +113,10 @@ async function loadChat(maxLimit) {
   }
 }
 
-getInboxSize();
+async function loadChat() {
+  await fetch(`/chat/Marcin/size`, {
+      method: 'GET',
+  }).then(r => r.json().then(data => loadMessages(data.inboxSize)))
+}
+
+loadChat();
