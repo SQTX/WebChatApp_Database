@@ -28,29 +28,48 @@ const itsMyMess = true;   // TODO: To remove
 
 const sendBtn = document.getElementById("sendBtn");
 const chatTextArea = document.getElementById("write-mess");
-// Send Button detector:
-sendBtn.addEventListener("click", () => {
+
+sendBtn.addEventListener('click', (event) => {
+  event.preventDefault();
   let messTxt = chatTextArea.value;
   chatTextArea.value = "";          // Clean textarea
   // If it's empty do nothing:
   if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
 
   addNewMessage(itsMyMess, messTxt);
+
+  // Send message to server:
+  const url = `http://localhost:3000/chat/Marcin/mess/${messTxt}`;
+  console.log("Wiadomosc", messTxt)
+  fetch(url, {
+      method: 'POST',
+      // method: 'GET',
+  })
+
 });
-// Enter in textArea detector:
-chatTextArea.addEventListener("keyup", (event) => {
-  if(event.key === "Enter") {
+chatTextArea.addEventListener('keypress', (event) => {
+  if(event.key === 'Enter'){
+    event.preventDefault();
     let messTxt = chatTextArea.value;
     chatTextArea.value = "";          // Clean textarea
     // If it's empty do nothing:
     if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
+
     addNewMessage(itsMyMess, messTxt);
-  };
-})
+
+    // Send message to server:
+    const url = `http://localhost:3000/chat/Marcin/mess/${messTxt}`;
+    console.log("Wiadomosc", messTxt)
+    fetch(url, {
+        method: 'POST',
+        // method: 'GET',
+    })
+  }
+});
 
 // *****************************************************************************
 // Swap frientd
-delay(300).then(() => {
+delay(400).then(() => {
   const friendsList = document.getElementById("friends-list");
   const friends = document.querySelectorAll("#friends-list div.friend");
   console.log(friends);

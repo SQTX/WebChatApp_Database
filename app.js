@@ -2,9 +2,10 @@ const express = require('express');
 const path = require('path');
 const friendsList = require('./routes/friendsList');
 const {loadChat, inboxSize} = require('./routes/loadChat');
-
+const getMessage = require('./routes/sendMessage');
+// Create app:
 const app = express();
-
+// Open localhost port:
 app.listen(3000, () => {
   console.log("Serwer is online");
 });
@@ -15,3 +16,5 @@ app.use(express.static(staticPath));
 friendsList(app, path);
 inboxSize(app);
 loadChat(app);
+
+getMessage(app);
