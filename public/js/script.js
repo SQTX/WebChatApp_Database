@@ -69,15 +69,16 @@ chatTextArea.addEventListener('keypress', (event) => {
 
 // *****************************************************************************
 // Swap frientd
-delay(400).then(() => {
+delay(500).then(() => {
   const friendsList = document.getElementById("friends-list");
   const friends = document.querySelectorAll("#friends-list div.friend");
   console.log(friends);
   friends.forEach(friend => {
     friend.addEventListener('click', () => {
+      const friendID = friend.getAttribute("friendid");
       const nicknameP = friend.querySelector("span p.nickname");
       const nickname = nicknameP.innerText;
-      console.log("Przyjaciel", nickname);
+      console.log(friendID, "Przyjaciel", nickname);
 
       // TODO: fetch do konwersacji {load: header, messages}
     })
