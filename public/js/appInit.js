@@ -11,6 +11,7 @@
 const friendsList = document.getElementById("friends-list");
 
 function addFriendToList(data) {
+  const userID = data.userID;
   let nickname = data.firstname + " " + data.lastname;
 
   const lastMess = "Lorem ipsum dolor sit amet.";
@@ -18,6 +19,8 @@ function addFriendToList(data) {
     data.profilePhoto === "" ? "defaultPhoto.jpg" : data.profilePhoto;
 
   const divFriend = createFriendDiv(nickname, lastMess, profilePhoto);
+  divFriend.setAttribute("friendID", userID);
+  // TODO: Sprawdzenie czy friendID jest w bazie danych zanjomych konkretnej osoby
   friendsList.appendChild(divFriend);
 
   console.log("Load new friend:", nickname);

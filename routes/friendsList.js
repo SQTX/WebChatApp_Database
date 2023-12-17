@@ -29,9 +29,9 @@ function friendsList(app, path) {
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
           const friend = results.rows[i + 1];
-          const { firstname, lastname, profilePhoto } = friend;
-          console.log(firstname, lastname, profilePhoto);
-          res.json({ firstname, lastname, profilePhoto });
+          const { userID, firstname, lastname, profilePhoto } = friend;
+          console.log(userID, firstname, lastname, profilePhoto);
+          res.json({ userID, firstname, lastname, profilePhoto });
         })
         .catch((e) => console.log(e))
         .finally(() => {
@@ -49,7 +49,6 @@ function friendsList(app, path) {
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
           const friend = results.rows[i+1];
-          console.log("chuj", friend);
           const profilePhoto = friend.profilePhoto;
           console.log("zdjecie:", profilePhoto);
           if (profilePhoto === "") {
