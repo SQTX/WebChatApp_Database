@@ -55,25 +55,25 @@ function loadConversationPath(app, userID) {
       .connect()
       .then(() => console.log("Connected successfuly"))
       .then(() =>
-        client.query(`SELECT "convID"
+        client.query(`SELECT "inboxID"
                       FROM public."conversation"
                       WHERE ("userID" = '1' AND "friendID" = '${userID}')`)
       )
       .then((results) => {
-        const conv = results.rows[0];
-        const { convID } = conv;
-        console.log("Searching conversation:", convID);
-        loadMessagesFromConversation(app, convID);
-        res.send({ convID: convID });
+        const inbox = results.rows[0];
+        const { inboxID } = inbox;
+        console.log("Searching inbox:", inboxID);
+        loadMessagesFromConversation(app, inboxID);
+        res.send({ inboxID: inboxID });
       })
       .catch((e) => console.log(e))
       .finally(() => client.end());
   });
 }
 
-function loadMessagesFromConversation(app, convID, messNumber = 10) {
+function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
   app.get(
-    `/chat/load/mess/${convID}/:lastMessTime/:messNumber?`,
+    `/chat/load/mess/${inboxID}/:lastMessTime/:messNumber?`,
     (req, res) => {
       let lastMessTime = req.params.lastMessTime;
       if (lastMessTime === "0") lastMessTime = "2023-10-10 20:31:03";
@@ -88,7 +88,7 @@ function loadMessagesFromConversation(app, convID, messNumber = 10) {
         .then(() =>
           client.query(`SELECT *
                       FROM public."message"
-                      WHERE ("inboxID" = '${convID}' AND "sentAt" < '${lastMessTime}')
+                      WHERE ("inboxID" = '${inboxID}' AND "sentAt" < '${lastMessTime}')
                       ORDER BY "sentAt" DESC
                       LIMIT ${messNumber}`)
         )

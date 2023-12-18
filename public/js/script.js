@@ -29,6 +29,10 @@ const itsMyMess = true;   // TODO: To remove
 const sendBtn = document.getElementById("sendBtn");
 const chatTextArea = document.getElementById("write-mess");
 
+function sendNewMessage(messText) {
+
+}
+
 sendBtn.addEventListener('click', (event) => {
   event.preventDefault();
   let messTxt = chatTextArea.value;
@@ -39,7 +43,7 @@ sendBtn.addEventListener('click', (event) => {
   addNewMessage(false, itsMyMess, messTxt);
 
   // Send message to server:
-  const url = `http://localhost:3000/chat/Marcin/mess/${messTxt}`;
+  const url = `http://localhost:3000/chat/send/${messTxt}`;
   console.log("Wiadomosc", messTxt)
   fetch(url, {
       method: 'POST',

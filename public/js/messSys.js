@@ -86,13 +86,16 @@ export function loadConversation(friendID, lastMessTime = 0) {
     method: "GET",
   }).then((r) =>
     r.json().then((value) => {
-      const convID = value.convID;
+      const inboxID = value.inboxID;
       // const lastMessTime = ;
       const messNumber = "";
 
-      fetch(`/chat/load/mess/${convID}/${lastMessTime}/${messNumber}`, {
+      fetch(`/chat/load/mess/${inboxID}/${lastMessTime}/${messNumber}`, {
         method: "GET",
-      }).then((r) => r.json().then((data) => loadMessages(data)));
+      }).then((r) => r.json().then((data) => {
+        // setInboxID();  TODO
+        loadMessages(data);
+      }));
     })
   );
 }
