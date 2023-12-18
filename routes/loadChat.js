@@ -1,8 +1,8 @@
-const { inbox, createClientDB } = require("./test_db");
+const { createClientDB } = require("./test_db");
 
 
 function sendInboxSize(app) {
-  app.get(`/chat/load`, (req, res) => {
+  app.get(`/chat/load/conversation`, (req, res) => {
     const client = createClientDB();
     client
       .connect()
@@ -22,7 +22,33 @@ function sendInboxSize(app) {
 }
 
 
-function findConversation(app, userID) {
+function loadAllConversations(app) {
+  const client = createClientDB();
+  client
+    .connect()
+    .then(() => console.log("Connected successfuly"))
+    .then(() =>
+      client.query(`SELECT "friendID"
+                    FROM public."conversation";`)
+    )
+    .then((results) => {
+      const data = results.rows;
+      let friendsID = [];
+      data.forEach((element) => friendsID.push(element));
+
+      const conversationNumber = friendsID.length;
+
+      for (let i = 0; i < conversationNumber; i++) {
+        const { friendID } = friendsID[i];
+        loadConversationPath(app, friendID);
+        console.log(`${i + 1}. Conversation for`, friendID, "is loaded.");
+      }
+    })
+    .catch((e) => console.log(e))
+    .finally(() => client.end());
+}
+
+function loadConversationPath(app, userID) {
   app.get(`/chat/load/${userID}`, (req, res) => {
     const client = createClientDB();
     client
@@ -37,6 +63,7 @@ function findConversation(app, userID) {
         const conv = results.rows[0];
         const { convID } = conv;
         console.log("Searching conversation:", convID);
+        loadMessagesFromConversation(app, convID);
         res.send({ convID: convID });
       })
       .catch((e) => console.log(e))
@@ -44,69 +71,36 @@ function findConversation(app, userID) {
   });
 }
 
+function loadMessagesFromConversation(app, convID, messNumber = 10) {
+  app.get(
+    `/chat/load/mess/${convID}/:lastMessTime/:messNumber?`,
+    (req, res) => {
+      let lastMessTime = req.params.lastMessTime;
+      if (lastMessTime === "0") lastMessTime = "2023-10-10 20:31:03";
 
-function sendMessagesFromConversation(app, convID, messNumber = 10) {
-  // if(messNumber)
-  // messNumber = 3;
+      let messNumber = req.params.messNumber;
+      if (messNumber === "0" || messNumber === undefined) messNumber = "10";
 
-  app.get(`/chat/load/mess/${convID}/:lastMessTime/:messNumber?`, (req, res) => {
-    let lastMessTime = req.params.lastMessTime;
-    if(lastMessTime === "0") lastMessTime = '2023-10-10 20:31:03'
-
-    let messNumber = req.params.messNumber;
-    if(messNumber === "0" || messNumber === undefined) messNumber = '10'
-
-    const client = createClientDB();
-    client
-      .connect()
-      .then(() => console.log("Connected successfuly"))
-      .then(() =>
-        client.query(`SELECT *
+      const client = createClientDB();
+      client
+        .connect()
+        .then(() => console.log("Connected successfuly"))
+        .then(() =>
+          client.query(`SELECT *
                       FROM public."message"
                       WHERE ("inboxID" = '${convID}' AND "sentAt" < '${lastMessTime}')
                       ORDER BY "sentAt" DESC
                       LIMIT ${messNumber}`)
-      )
-      .then((results) => {
-        // console.table(results.rows);
-        // console.log(results.rows);
-        const data = results.rows;
-        res.send(data);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => client.end());
-  });
+        )
+        .then((results) => {
+          const data = results.rows;
+          res.send(data);
+        })
+        .catch((e) => console.log(e))
+        .finally(() => client.end());
+    }
+  );
 }
 
 
-
-
-
-
-
-const messageNumber = inbox.length;
-
-const firstMessageLoadLimit = 10;
-
-
-
-
-function loadChat(app) {
-  findConversation(app);
-
-  const loadLimit =
-    messageNumber > firstMessageLoadLimit
-      ? firstMessageLoadLimit
-      : messageNumber;
-
-  for (let i = 0; i < loadLimit; i++) {
-    app.get(`/chat/Marcin/mess${i + 1}`, (req, res) => {
-      const messageObj = inbox[i];
-      const { authorID, messageTxt, sentAt } = messageObj;
-
-      res.json({ authorID, messageTxt, sentAt });
-    });
-  }
-}
-
-module.exports = { loadChat, sendInboxSize, findConversation, sendMessagesFromConversation };
+module.exports = { loadAllConversations, sendInboxSize };

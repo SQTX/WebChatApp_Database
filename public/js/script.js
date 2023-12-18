@@ -1,6 +1,6 @@
 // Includes:
-import {openTerminal} from "./terminal.js";
-import {loadChatHeader, addNewMessage, loadConversation, clearChat} from "./messSys.js";
+import { openTerminal } from "./terminal.js";
+import { loadChatHeader, addNewMessage, loadConversation, clearChat } from "./messSys.js";
 
 // *****************************************************************************
 // Delay:
@@ -69,7 +69,7 @@ chatTextArea.addEventListener('keypress', (event) => {
 
 // *****************************************************************************
 // Swap frientd
-delay(500).then(() => {
+delay(750).then(() => {
   const friendsList = document.getElementById("friends-list");
   const friends = document.querySelectorAll("#friends-list div.friend");
   console.log(friends);

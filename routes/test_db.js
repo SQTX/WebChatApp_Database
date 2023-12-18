@@ -1,44 +1,35 @@
-// const conversation = [
+// const inbox = [
 //   {
-//     convID: "1",
-//     userID: user,
-//     friendID: users[0],
-//     inboxID: inbox,
-//   }
+//     authorID: "Marcin",
+//     messageTxt: "Halo, jak masz na imię?",
+//     sentAt: "2023-12-25_13:25:12",
+//   },
+//   {
+//     authorID: "Daniel",
+//     messageTxt: "Siema siema",
+//     sentAt: "2023-12-25_14:11:03",
+//   },
+//   {
+//     authorID: "Daniel",
+//     messageTxt: "A co tam potrzebujesz",
+//     sentAt: "2023-12-25_14:11:33",
+//   },
+//   {
+//     authorID: "Marcin",
+//     messageTxt: "Aaa nic nic",
+//     sentAt: "2023-12-26_11:55:12",
+//   },
+//   {
+//     authorID: "Daniel",
+//     messageTxt: "No to spoxon",
+//     sentAt: "2023-12-27_07:35:52",
+//   },
+//   {
+//     authorID: "Daniel",
+//     messageTxt: "Xddd",
+//     sentAt: "2023-12-27_07:36:52",
+//   },
 // ]
-
-const inbox = [
-  {
-    authorID: "Marcin",
-    messageTxt: "Halo, jak masz na imię?",
-    sentAt: "2023-12-25_13:25:12",
-  },
-  {
-    authorID: "Daniel",
-    messageTxt: "Siema siema",
-    sentAt: "2023-12-25_14:11:03",
-  },
-  {
-    authorID: "Daniel",
-    messageTxt: "A co tam potrzebujesz",
-    sentAt: "2023-12-25_14:11:33",
-  },
-  {
-    authorID: "Marcin",
-    messageTxt: "Aaa nic nic",
-    sentAt: "2023-12-26_11:55:12",
-  },
-  {
-    authorID: "Daniel",
-    messageTxt: "No to spoxon",
-    sentAt: "2023-12-27_07:35:52",
-  },
-  {
-    authorID: "Daniel",
-    messageTxt: "Xddd",
-    sentAt: "2023-12-27_07:36:52",
-  },
-]
 
 
 // const foo = "'S'";
@@ -109,4 +100,4 @@ function createClientDB() {
   return client;
 }
 
-module.exports = {inbox, createClientDB};
+module.exports = {createClientDB};

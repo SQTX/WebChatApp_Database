@@ -1,5 +1,6 @@
 const { createClientDB } = require("./test_db");
 
+
 function friendsList(app, path) {
   // Send friends number:
   app.get("/friendsNumber", (req, res) => {
@@ -7,8 +8,8 @@ function friendsList(app, path) {
     client
       .connect()
       .then(() => console.log("Connected successfuly"))
-      // .then(() => client.query(`SELECT * FROM public."user"`))
-      .then(() => client.query(`SELECT COUNT("email") FROM public."user"`))
+      .then(() => client.query(`SELECT COUNT("email") 
+                                FROM public."user"`))
       .then((results) => {
         let friendNumber = parseInt(results.rows[0].count);
         friendNumber -= 1; // One of users in DB is not a friend (he's truly user)

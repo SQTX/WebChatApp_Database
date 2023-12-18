@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const friendsList = require('./routes/friendsList');
-const {loadChat, sendInboxSize, findConversation, sendMessagesFromConversation} = require('./routes/loadChat');
+const { loadAllConversations, sendInboxSize } = require('./routes/loadChat');
 const sendMessage = require('./routes/sendMessage');
 // Create app:
 const app = express();
@@ -15,10 +15,7 @@ app.use(express.static(staticPath));
 
 friendsList(app, path);
 sendInboxSize(app);
-findConversation(app, 3);
-sendMessagesFromConversation(app, 1);
+loadAllConversations(app);
 
-
-// loadChat(app);
 
 sendMessage(app);
