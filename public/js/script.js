@@ -1,6 +1,6 @@
 // Includes:
 import {openTerminal} from "./terminal.js";
-import {loadChatHeader, addNewMessage} from "./messSys.js";
+import {loadChatHeader, addNewMessage, loadConversation, clearChat} from "./messSys.js";
 
 // *****************************************************************************
 // Delay:
@@ -36,7 +36,7 @@ sendBtn.addEventListener('click', (event) => {
   // If it's empty do nothing:
   if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
 
-  addNewMessage(itsMyMess, messTxt);
+  addNewMessage(false, itsMyMess, messTxt);
 
   // Send message to server:
   const url = `http://localhost:3000/chat/Marcin/mess/${messTxt}`;
@@ -55,7 +55,7 @@ chatTextArea.addEventListener('keypress', (event) => {
     // If it's empty do nothing:
     if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
 
-    addNewMessage(itsMyMess, messTxt);
+    addNewMessage(false, itsMyMess, messTxt);
 
     // Send message to server:
     const url = `http://localhost:3000/chat/Marcin/mess/${messTxt}`;
@@ -80,7 +80,12 @@ delay(500).then(() => {
       const nickname = nicknameP.innerText;
       console.log(friendID, "Przyjaciel", nickname);
 
-      // TODO: fetch do konwersacji {load: header, messages}
+      const imgElem = friend.querySelector("div.profile-img img");
+      const profilePhoto = imgElem.getAttribute('src');
+
+      loadChatHeader(nickname, true, profilePhoto);   // NOTE: Hard coded friend status
+      clearChat();
+      loadConversation(friendID);
     })
   });
 });

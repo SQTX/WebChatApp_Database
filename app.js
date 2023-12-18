@@ -19,6 +19,6 @@ findConversation(app, 3);
 sendMessagesFromConversation(app, 1);
 
 
-loadChat(app);
+// loadChat(app);
 
 sendMessage(app);

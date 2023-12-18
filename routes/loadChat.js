@@ -47,14 +47,14 @@ function findConversation(app, userID) {
 
 function sendMessagesFromConversation(app, convID, messNumber = 10) {
   // if(messNumber)
-  messNumber = 3;
+  // messNumber = 3;
 
   app.get(`/chat/load/mess/${convID}/:lastMessTime/:messNumber?`, (req, res) => {
     let lastMessTime = req.params.lastMessTime;
     if(lastMessTime === "0") lastMessTime = '2023-10-10 20:31:03'
 
     let messNumber = req.params.messNumber;
-    if(messNumber === "0" || messNumber === undefined) messNumber = '5'
+    if(messNumber === "0" || messNumber === undefined) messNumber = '10'
 
     const client = createClientDB();
     client

@@ -1,3 +1,12 @@
+export function clearChat() {
+  const chat = document.getElementById("chat");
+  const messages = chat.querySelectorAll("div.message");
+  messages.forEach(message => {
+    message.remove();
+  });
+}
+
+
 export function loadChatHeader(nickname, active, profilePhoto) {
   const header = document.getElementById("chat-header");
 
@@ -5,12 +14,12 @@ export function loadChatHeader(nickname, active, profilePhoto) {
   const nicknameP = header.querySelector("p.nickname");
   nicknameP.innerText = nickname;
 
-// Change status
+  // Change status
   const statusDivs = header.querySelectorAll("div.status");
-  if(active) {
+  if (active) {
     statusDivs[0].classList.add("active");
     statusDivs[1].classList.remove("active");
-  }else {
+  } else {
     statusDivs[1].classList.add("active");
     statusDivs[0].classList.remove("active");
   }
@@ -21,25 +30,70 @@ export function loadChatHeader(nickname, active, profilePhoto) {
 }
 
 
-export function addNewMessage(amIAuthor, messTxt) {
+export function addNewMessage(loadMode = false, amIAuthor, messTxt, isLast = false, sentAt = 0) {
+  const chat = document.getElementById("chat");
+
   const message = document.createElement("p");
   message.innerText = messTxt;
 
-
   const messBubble = document.createElement("div");
   messBubble.classList.add("message");
-  if(amIAuthor) {
+  if (amIAuthor) {
     messBubble.classList.add("user-mess");
-  }else {
+  } else {
     messBubble.classList.add("friend-mess");
+  }
+  if(isLast) {
+    // Delete previous last element:
+    const prevLastMess = document.getElementById("last-loaded");
+    if(prevLastMess !== null) {
+      prevLastMess.removeAttribute('id');
+      prevLastMess.removeAttribute('sentAt');
+    }
+
+    // Add new last element:
+    messBubble.id = "last-loaded";
+    messBubble.setAttribute("sentAt", sentAt);
   }
   messBubble.appendChild(message);
 
-
-  const chat = document.getElementById("chat");
-  chat.appendChild(messBubble);
+  
+  if(loadMode) chat.insertBefore(messBubble, chat.firstChild);
+  else chat.appendChild(messBubble);
 
   // Automatic scroll down:
   messBubble.scrollIntoView();
-  messBubble.scrollIntoView({behavior: "smooth"});
-};
+  messBubble.scrollIntoView({ behavior: "smooth" });
+}
+
+
+function loadMessages(data) {
+  console.log(data);
+  // data.reverse();
+  data.forEach((message, index) => {
+    const {authorID, sentAt, messTxt} = message;
+    console.log("Wiadomość:", authorID, sentAt, messTxt);
+
+    const amIAuthor = (authorID === 1) ? true : false;
+    if(index === (data.length - 1)) addNewMessage(true, amIAuthor, messTxt, true, sentAt);  // Last loaded mess
+    else addNewMessage(true, amIAuthor, messTxt);
+  });
+
+}
+
+export function loadConversation(friendID, lastMessTime = 0) {
+  fetch(`/chat/load/${friendID}`, {
+    method: "GET",
+  }).then((r) =>
+    r.json().then((value) => {
+      const convID = value.convID;
+      // const lastMessTime = ;
+      const messNumber = "";
+
+      fetch(`/chat/load/mess/${convID}/${lastMessTime}/${messNumber}`, {
+        method: "GET",
+      }).then((r) => r.json().then((data) => loadMessages(data)));
+    })
+  );
+}
+
