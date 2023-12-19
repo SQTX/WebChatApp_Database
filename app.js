@@ -17,5 +17,4 @@ friendsList(app, path);
 sendInboxSize(app);
 loadAllConversations(app);
 
-
 sendMessage(app);

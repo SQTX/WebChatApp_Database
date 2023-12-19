@@ -1,7 +1,10 @@
 // Includes:
+import { getNowTime } from "./time.js";
 import { openTerminal } from "./terminal.js";
 import { loadChatHeader, addNewMessage, loadConversation, clearChat } from "./messSys.js";
 
+
+const userID = 1;
 // *****************************************************************************
 // Delay:
 function delay(time) {
@@ -29,24 +32,10 @@ const itsMyMess = true;   // TODO: To remove
 const sendBtn = document.getElementById("sendBtn");
 const chatTextArea = document.getElementById("write-mess");
 
-function getNowTime() {
-  const now = new Date();
-  // Date:
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const day = now.getDate();
-  // Time:
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-
-  const time = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  console.log(time);
-  return time;
-}
 
 function sendNewMessage(event) {
   event.preventDefault();
+  const authorID = userID;
   const sentAt = getNowTime();
 
   let messTxt = chatTextArea.value;
@@ -62,8 +51,8 @@ function sendNewMessage(event) {
   const inboxID = chat.getAttribute('active-inbox');
 
   // Send message to server:
-  console.log(`Send new mess: "${messTxt}" on '${inboxID}' inbox at ${sentAt}.`);
-  const url = `/chat/send/${inboxID}/${sentAt}/${messTxt}`;
+  console.log(`User '${authorID}' send new mess: "${messTxt}" to '${inboxID}' inbox at ${sentAt}.`);
+  const url = `/chat/send/${inboxID}/${authorID}/${sentAt}/${messTxt}`;
   fetch(url, {
       method: 'POST',
   })

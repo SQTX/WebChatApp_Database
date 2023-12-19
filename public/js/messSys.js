@@ -1,3 +1,5 @@
+import { getNowTime } from "./time.js";
+
 export function clearChat() {
   const chat = document.getElementById("chat");
   const messages = chat.querySelectorAll("div.message");
@@ -93,7 +95,7 @@ export function loadConversation(friendID, lastMessTime = 0) {
   }).then((r) =>
     r.json().then((value) => {
       const inboxID = value.inboxID;
-      // const lastMessTime = ;
+      const lastMessTime = getNowTime();
       const messNumber = "";
 
       fetch(`/chat/load/mess/${inboxID}/${lastMessTime}/${messNumber}`, {
