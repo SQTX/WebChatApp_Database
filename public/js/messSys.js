@@ -67,6 +67,12 @@ export function addNewMessage(loadMode = false, amIAuthor, messTxt, isLast = fal
 }
 
 
+function setInboxOnChat(inboxID) {
+  const chat = document.getElementById("chat");
+  chat.setAttribute("active-inbox", inboxID)
+}
+
+
 function loadMessages(data) {
   console.log(data);
   // data.reverse();
@@ -93,7 +99,7 @@ export function loadConversation(friendID, lastMessTime = 0) {
       fetch(`/chat/load/mess/${inboxID}/${lastMessTime}/${messNumber}`, {
         method: "GET",
       }).then((r) => r.json().then((data) => {
-        // setInboxID();  TODO
+        setInboxOnChat(inboxID);
         loadMessages(data);
       }));
     })
