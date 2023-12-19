@@ -1,20 +1,25 @@
-const express = require('express');
-const path = require('path');
+// Package:
+const express = require('express');   // Express framework
+const path = require('path');         // Path module
+// Files
 const friendsList = require('./routes/friendsList');
-const { loadAllConversations, sendInboxSize } = require('./routes/loadChat');
+const { sendInboxSize, loadAllConversations } = require('./routes/loadChat');
 const sendMessage = require('./routes/sendMessage');
-// Create app:
-const app = express();
-// Open localhost port:
-app.listen(3000, () => {
-  console.log("Serwer is online");
-});
 
-const staticPath = path.join(__dirname, "/public");
-app.use(express.static(staticPath));
 
-friendsList(app, path);
-sendInboxSize(app);
-loadAllConversations(app);
+// =====================================================================================================
+// Set up:
+const app = express();                                     // Create new express application
+app.listen(3000, () => console.log("Serwer is online"));   // Open port 3000 on localhost
 
-sendMessage(app);
+const staticPath = path.join(__dirname, "/public");        // Set static path to frontend files
+app.use(express.static(staticPath));                       // Use it
+
+
+// =====================================================================================================
+// Call backend functions:
+friendsList(app, path);           // Load friends list
+sendInboxSize(app);               // Get size of user inbox
+loadAllConversations(app);        // Load path for any conversation
+
+sendMessage(app);                 // Load path for sending new messages

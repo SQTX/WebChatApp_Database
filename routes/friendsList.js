@@ -1,6 +1,9 @@
 const { createClientDB } = require("./test_db");
 
-
+// =====================================================================================================
+// PUBLIC:
+// =====================================================================================================
+// TODO: Make this function more readable
 function friendsList(app, path) {
   // Send friends number:
   app.get("/friendsNumber", (req, res) => {
@@ -8,7 +11,7 @@ function friendsList(app, path) {
     client
       .connect()
       .then(() => console.log("Connected successfuly"))
-      .then(() => client.query(`SELECT COUNT("email") 
+      .then(() => client.query(`SELECT COUNT("email")
                                 FROM public."user"`))
       .then((results) => {
         let friendNumber = parseInt(results.rows[0].count);
@@ -70,4 +73,6 @@ function friendsList(app, path) {
   }
 }
 
+// =====================================================================================================
+// Export:
 module.exports = friendsList;

@@ -1,13 +1,5 @@
+// TODO: Make clean this file
 // Connection with backend
-
-// const activeUserNickname = document.querySelector('.chat-header>p.nickname');
-
-// function fillUserData(data) {
-//   let nickname = data.firstName;
-//   nickname += " " + data.lastName;
-//   activeUserNickname.innerText = nickname;
-// }
-
 const friendsList = document.getElementById("friends-list");
 
 function addFriendToList(data) {
@@ -77,7 +69,7 @@ function getUserFromServer() {
 
 getUserFromServer();
 
-// **********************************************************************
+// =====================================================================================================
 import { loadChatHeader } from "./messSys.js";
 loadChatHeader("Szalony Marcinek", true, "img/friend-3.jpg");
 

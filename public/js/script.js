@@ -1,17 +1,15 @@
 // Includes:
-import { getNowTime } from "./time.js";
+import { getNowTime, delay } from "./time.js";
 import { openTerminal } from "./terminal.js";
-import { loadChatHeader, addNewMessage, loadConversation, clearChat } from "./messSys.js";
+import { loadChatHeader, loadConversation, clearChat, sendNewMessage } from "./messSys.js";
 
-
+// =====================================================================================================
+// Constant:
 const userID = 1;
-// *****************************************************************************
-// Delay:
-function delay(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
-}
-// *****************************************************************************
-// Settings:
+// const userID = getUserID();
+
+// =====================================================================================================
+// Settings control:
 const settingsBtn = document.getElementById("settings-btn");
 
 settingsBtn.addEventListener("click", () => {
@@ -24,54 +22,23 @@ settingsBtn.addEventListener("click", () => {
   terminalBtn.addEventListener('click', () => openTerminal());
 });
 
-
-// *****************************************************************************
-// Add new message:
-const itsMyMess = true;   // TODO: To remove
-
+// =====================================================================================================
+// Send new message:
 const sendBtn = document.getElementById("sendBtn");
 const chatTextArea = document.getElementById("write-mess");
-
-
-function sendNewMessage(event) {
-  event.preventDefault();
-  const authorID = userID;
-  const sentAt = getNowTime();
-
-  let messTxt = chatTextArea.value;
-  chatTextArea.value = "";            // Clean textarea
-
-  // If it's empty do nothing:
-  if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
-
-  addNewMessage(false, itsMyMess, messTxt);
-
-  // Get inboxID:
-  const chat = document.getElementById("chat");
-  const inboxID = chat.getAttribute('active-inbox');
-
-  // Send message to server:
-  console.log(`User '${authorID}' send new mess: "${messTxt}" to '${inboxID}' inbox at ${sentAt}.`);
-  const url = `/chat/send/${inboxID}/${authorID}/${sentAt}/${messTxt}`;
-  fetch(url, {
-      method: 'POST',
-  })
-}
-
-
+// Calling the message sending function:
 sendBtn.addEventListener('click', (event) => {
-  sendNewMessage(event);
+  sendNewMessage(event, userID);
 });
 chatTextArea.addEventListener('keypress', (event) => {
   if(event.key === 'Enter'){
-    sendNewMessage(event);
+    sendNewMessage(event, userID);
   }
 });
 
-// *****************************************************************************
-// Swap frientd
+// =====================================================================================================
+// Swapping the chat with another friend:
 delay(750).then(() => {
-  const friendsList = document.getElementById("friends-list");
   const friends = document.querySelectorAll("#friends-list div.friend");
   console.log(friends);
   friends.forEach(friend => {

@@ -1,53 +1,11 @@
 const { createClientDB } = require("./test_db");
 
-
-function sendInboxSize(app) {
-  app.get(`/chat/load/conversation`, (req, res) => {
-    const client = createClientDB();
-    client
-      .connect()
-      .then(() => console.log("Connected successfuly"))
-      .then(() =>
-        client.query(`SELECT COUNT("convID")
-                      FROM public."conversation";`)
-      )
-      .then((results) => {
-        const count = Number(results.rows[0].count);
-        console.log("Conversation count:", count);
-        res.send({ count: count });
-      })
-      .catch((e) => console.log(e))
-      .finally(() => client.end());
-  });
-}
-
-
-function loadAllConversations(app) {
-  const client = createClientDB();
-  client
-    .connect()
-    .then(() => console.log("Connected successfuly"))
-    .then(() =>
-      client.query(`SELECT "friendID"
-                    FROM public."conversation";`)
-    )
-    .then((results) => {
-      const data = results.rows;
-      let friendsID = [];
-      data.forEach((element) => friendsID.push(element));
-
-      const conversationNumber = friendsID.length;
-
-      for (let i = 0; i < conversationNumber; i++) {
-        const { friendID } = friendsID[i];
-        loadConversationPath(app, friendID);
-        console.log(`${i + 1}. Conversation for`, friendID, "is loaded.");
-      }
-    })
-    .catch((e) => console.log(e))
-    .finally(() => client.end());
-}
-
+// =====================================================================================================
+// PRIVATE:
+// =====================================================================================================
+/**
+ * Load inbox paths for any user's conversation.
+ */
 function loadConversationPath(app, userID) {
   app.get(`/chat/load/${userID}`, (req, res) => {
     const client = createClientDB();
@@ -71,6 +29,9 @@ function loadConversationPath(app, userID) {
   });
 }
 
+/**
+ * Load all messages from inbox.
+ */
 function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
   app.get(
     `/chat/load/mess/${inboxID}/:lastMessTime/:messNumber?`,
@@ -102,5 +63,61 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
   );
 }
 
+// =====================================================================================================
+// PUBLIC:
+// =====================================================================================================
+/**
+ * Return inboxs numbers
+ */
+function sendInboxSize(app) {
+  app.get(`/chat/load/conversation`, (req, res) => {
+    const client = createClientDB();
+    client
+      .connect()
+      .then(() => console.log("Connected successfuly"))
+      .then(() =>
+        client.query(`SELECT COUNT("convID")
+                      FROM public."conversation";`)
+      )
+      .then((results) => {
+        const count = Number(results.rows[0].count);
+        console.log("Conversation count:", count);
+        res.send({ count: count });
+      })
+      .catch((e) => console.log(e))
+      .finally(() => client.end());
+  });
+}
 
-module.exports = { loadAllConversations, sendInboxSize };
+/**
+ * Function to load all path form caht with any friend.
+ */
+function loadAllConversations(app) {
+  const client = createClientDB();
+  client
+    .connect()
+    .then(() => console.log("Connected successfuly"))
+    .then(() =>
+      client.query(`SELECT "friendID"
+                    FROM public."conversation";`)
+    )
+    .then((results) => {
+      const data = results.rows;
+      let friendsID = [];
+      data.forEach((element) => friendsID.push(element));
+
+      const conversationNumber = friendsID.length;
+
+      for (let i = 0; i < conversationNumber; i++) {
+        const { friendID } = friendsID[i];
+        loadConversationPath(app, friendID);
+        console.log(`${i + 1}. Conversation for`, friendID, "is loaded.");
+      }
+    })
+    .catch((e) => console.log(e))
+    .finally(() => client.end());
+}
+
+// =====================================================================================================
+// Export:
+module.exports = { sendInboxSize, loadAllConversations };
