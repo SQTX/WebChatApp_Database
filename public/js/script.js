@@ -1,14 +1,15 @@
 // Includes:
-import {openTerminal} from "./terminal.js";
-import {loadChatHeader, addNewMessage} from "./messSys.js";
+import { getNowTime, delay } from "./time.js";
+import { openTerminal } from "./terminal.js";
+import { loadChatHeader, loadConversation, clearChat, sendNewMessage } from "./messSys.js";
 
-// *****************************************************************************
-// Delay:
-function delay(time) {
-  return new Promise(resolve => setTimeout(resolve, time));
-}
-// *****************************************************************************
-// Settings:
+// =====================================================================================================
+// Constant:
+const userID = 1;
+// const userID = getUserID();
+
+// =====================================================================================================
+// Settings control:
 const settingsBtn = document.getElementById("settings-btn");
 
 settingsBtn.addEventListener("click", () => {
@@ -21,46 +22,38 @@ settingsBtn.addEventListener("click", () => {
   terminalBtn.addEventListener('click', () => openTerminal());
 });
 
-
-// *****************************************************************************
-// Add new message:
-const itsMyMess = true;   // TODO: To remove
-
+// =====================================================================================================
+// Send new message:
 const sendBtn = document.getElementById("sendBtn");
 const chatTextArea = document.getElementById("write-mess");
-// Send Button detector:
-sendBtn.addEventListener("click", () => {
-  let messTxt = chatTextArea.value;
-  chatTextArea.value = "";          // Clean textarea
-  // If it's empty do nothing:
-  if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
-
-  addNewMessage(itsMyMess, messTxt);
+// Calling the message sending function:
+sendBtn.addEventListener('click', (event) => {
+  sendNewMessage(event, userID);
 });
-// Enter in textArea detector:
-chatTextArea.addEventListener("keyup", (event) => {
-  if(event.key === "Enter") {
-    let messTxt = chatTextArea.value;
-    chatTextArea.value = "";          // Clean textarea
-    // If it's empty do nothing:
-    if(messTxt === "" || messTxt === "\n" || messTxt === "\r\n") return 0;
-    addNewMessage(itsMyMess, messTxt);
-  };
-})
+chatTextArea.addEventListener('keypress', (event) => {
+  if(event.key === 'Enter'){
+    sendNewMessage(event, userID);
+  }
+});
 
-// *****************************************************************************
-// Swap frientd
-delay(300).then(() => {
-  const friendsList = document.getElementById("friends-list");
+// =====================================================================================================
+// Swapping the chat with another friend:
+delay(750).then(() => {
   const friends = document.querySelectorAll("#friends-list div.friend");
   console.log(friends);
   friends.forEach(friend => {
     friend.addEventListener('click', () => {
+      const friendID = friend.getAttribute("friendid");
       const nicknameP = friend.querySelector("span p.nickname");
       const nickname = nicknameP.innerText;
-      console.log("Przyjaciel", nickname);
+      console.log(friendID, "Przyjaciel", nickname);
 
-      // TODO: fetch do konwersacji {load: header, messages}
+      const imgElem = friend.querySelector("div.profile-img img");
+      const profilePhoto = imgElem.getAttribute('src');
+
+      loadChatHeader(nickname, true, profilePhoto);   // NOTE: Hard coded friend status
+      clearChat();
+      loadConversation(friendID);
     })
   });
 });
