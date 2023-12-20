@@ -1,8 +1,12 @@
 // Includes:
 import {openTerminal} from "./terminal.js";
-import {addNewMessage} from "./messSys.js";
+import {loadChatHeader, addNewMessage} from "./messSys.js";
 
-
+// *****************************************************************************
+// Delay:
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
 // *****************************************************************************
 // Settings:
 const settingsBtn = document.getElementById("settings-btn");
@@ -45,4 +49,18 @@ chatTextArea.addEventListener("keyup", (event) => {
 })
 
 // *****************************************************************************
+// Swap frientd
+delay(300).then(() => {
+  const friendsList = document.getElementById("friends-list");
+  const friends = document.querySelectorAll("#friends-list div.friend");
+  console.log(friends);
+  friends.forEach(friend => {
+    friend.addEventListener('click', () => {
+      const nicknameP = friend.querySelector("span p.nickname");
+      const nickname = nicknameP.innerText;
+      console.log("Przyjaciel", nickname);
 
+      // TODO: fetch do konwersacji {load: header, messages}
+    })
+  });
+});
