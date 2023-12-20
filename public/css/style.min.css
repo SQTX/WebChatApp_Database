@@ -392,7 +392,7 @@ section#terminal div.log-area {
   height: 91%;
   width: 95%;
 }
-section#terminal div.log-area p.log {
+section#terminal div.log-area p.log, section#terminal div.log-area p.empty-log {
   position: relative;
   height: 5%;
   color: #fff;

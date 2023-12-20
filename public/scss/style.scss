@@ -419,7 +419,7 @@ section#terminal {
     width: 95%;
     // border: 1px solid #fff;
 
-    p.log {
+    p.log, p.empty-log {
       position: relative;
       height: 5%;
       color: #fff;
