@@ -253,7 +253,7 @@ main {
       left: 0;
       display: flex;
       flex-direction: column;
-      justify-content: safe end;  // safe enables scrolling
+      justify-content: safe end; // safe enables scrolling
       height: 74%;
       width: 100%;
       padding: 2%;
@@ -284,7 +284,7 @@ main {
         p {
           height: 100%;
           width: 100%;
-          word-wrap:break-word;
+          word-wrap: break-word;
         }
       }
     }
@@ -370,6 +370,7 @@ section#terminal {
   width: 60vw;
   border: 2px solid gray;
   background-color: #000;
+  font-family: monospace;
 
   &.active {
     display: block;
@@ -383,14 +384,72 @@ section#terminal {
     width: 100%;
     background-color: gray;
 
+    p {
+      height: 100%;
+      padding: 1px 2px;
+      color: #fff;
+      font-size: 14px;
+    }
+
     button {
       position: absolute;
-      top: 0;
-      right: 0;
       height: 95%;
       width: 2.5%;
       border: 1 solid black;
       background-color: transparent;
+      color: #fff;
+    }
+    button#terminal-clear {
+      top: 0;
+      right: 2.5%;
+    }
+
+    button#terminal-exit {
+      top: 0;
+      right: 0;
+    }
+  }
+
+  div.log-area {
+    position: absolute;
+    top: 6.5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 91%;
+    width: 95%;
+    // border: 1px solid #fff;
+
+    p.log {
+      position: relative;
+      height: 5%;
+      color: #fff;
+      font-size: 100%;
+    }
+
+    #I-beam {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      height: 80%;
+      width: 1.5px;
+      margin-left: 1%;
+      background-color: #fff;
+      animation-name: I-beam;
+      animation-duration: 0.8s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes I-beam {
+      0% {
+        height: 80%;
+      }
+      50% {
+        height: 0%;
+      }
+      100% {
+        height: 80%;
+      }
     }
   }
 }

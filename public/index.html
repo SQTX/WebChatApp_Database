@@ -89,12 +89,18 @@
   <footer>
     <p class="credits">University project created by <b>Konrad Krzysztoszek</b> & <b>Jakub Sitarczyk</b>&copy;</p>
   </footer>
-  <!-- TODO: class="active" -->
+
   <section id="terminal">
     <div class="header-bar">
-      <button class="terminal-exit">X</button>
+      <p>Log history</p>
+      <button id="terminal-clear" title="Clear"><i class="fa-solid fa-broom"></i></button>
+      <button id="terminal-exit" title="Exit"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="print-area"></div>
+    <div class="log-area last">
+      <p class="log">> Test1</p>
+      <p class="log">> Test2</p>
+      <p class="log empty">> <span id="I-beam"></span></p>
+    </div>
   </section>
   <script type="module" src="js/appInit.js"></script>
   <script type="module" src="js/script.js"></script>
