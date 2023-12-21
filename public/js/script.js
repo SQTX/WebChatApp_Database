@@ -1,6 +1,7 @@
 // Includes:
 import { getNowTime, delay } from "./time.js";
 import { openTerminal } from "./terminal.js";
+import { openAddFriendWindow } from "./addFriend.js";
 import { loadChatHeader, loadConversation, clearChat, sendNewMessage } from "./messSys.js";
 
 // =====================================================================================================
@@ -17,7 +18,7 @@ settingsBtn.addEventListener("click", () => {
   menuBox.classList.toggle("active");
 
   const addUser = document.querySelector("menu li.option:nth-child(1)");
-  addUser.addEventListener('click', ()=>console.log("Add user func"));
+  addUser.addEventListener('click', ()=> openAddFriendWindow());
   const terminalBtn = document.querySelector("menu li.option:nth-child(2)");
   terminalBtn.addEventListener('click', () => openTerminal());
 });
