@@ -279,6 +279,9 @@ main section#chat-window div#write-area {
   height: 12%;
   width: 100%;
   border: 1px solid #000;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
 }
 main section#chat-window div#write-area textarea#write-mess {
   position: absolute;
@@ -337,6 +340,90 @@ footer p {
       align-content: center;
 }
 
+section#add-friend {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: 30vh;
+  width: 25vw;
+  border: 2px solid #000;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+section#add-friend.active {
+  display: block;
+}
+section#add-friend div.header-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16%;
+  width: 100%;
+  border-bottom: 2px solid #000;
+  background-color: rgb(241, 199, 120);
+}
+section#add-friend div.header-bar p {
+  height: 100%;
+  margin: 1%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+section#add-friend div.header-bar button {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  aspect-ratio: 1/1;
+  height: 95%;
+  border: 1 solid black;
+  border-radius: 5px;
+  background-color: transparent;
+  font-size: 30px;
+}
+section#add-friend div.header-bar button i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+section#add-friend input {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  height: 25%;
+  width: 100%;
+  border: 1px solid #000;
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+  font-size: 30px;
+}
+section#add-friend input:focus {
+  outline: none;
+}
+section#add-friend button#send-invit {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  height: 7vh;
+  width: 100%;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background-color: rgb(200, 104, 221);
+  color: #fff;
+  font-size: 20px;
+}
+
 section#terminal {
   display: none;
   position: absolute;
@@ -392,7 +479,8 @@ section#terminal div.log-area {
   height: 91%;
   width: 95%;
 }
-section#terminal div.log-area p.log, section#terminal div.log-area p.empty-log {
+section#terminal div.log-area p.log,
+section#terminal div.log-area p.empty-log {
   position: relative;
   height: 5%;
   color: #fff;

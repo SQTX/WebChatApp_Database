@@ -296,6 +296,9 @@ main {
       height: 12%;
       width: 100%;
       border: 1px solid #000;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
 
       textarea#write-mess {
         position: absolute;
@@ -360,6 +363,99 @@ footer {
   }
 }
 
+// ADD FRIEND ***********************************************
+section#add-friend {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 30vh;
+  width: 25vw;
+  border: 2px solid #000;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &.active {
+    display: block;
+  }
+
+  div.header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16%;
+    width: 100%;
+    border-bottom: 2px solid #000;
+    background-color: $bar-color;
+
+    p {
+      height: 100%;
+      margin: 1%;
+      text-align: center;
+      // color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      // background-color: black;
+    }
+
+    button {
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      aspect-ratio: 1 / 1;
+      height: 95%;
+      border: 1 solid black;
+      border-radius: 5px;
+      background-color: transparent;
+      // color: #fff;
+      font-size: 30px;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  input {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%);
+    height: 25%;
+    width: 100%;
+    border: 1px solid #000;
+    border-left: 0;
+    border-right: 0;
+    text-align: center;
+    font-size: 30px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button#send-invit {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 7vh;
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-color: $otherElem-color;
+    color: #fff;
+    font-size: 20px;
+  }
+}
+
+// TERMINAL ***********************************************
 section#terminal {
   display: none;
   position: absolute;
@@ -398,15 +494,16 @@ section#terminal {
       border: 1 solid black;
       background-color: transparent;
       color: #fff;
-    }
-    button#terminal-clear {
-      top: 0;
-      right: 2.5%;
-    }
 
-    button#terminal-exit {
-      top: 0;
-      right: 0;
+      &#terminal-clear {
+        top: 0;
+        right: 2.5%;
+      }
+
+      &#terminal-exit {
+        top: 0;
+        right: 0;
+      }
     }
   }
 
@@ -419,7 +516,8 @@ section#terminal {
     width: 95%;
     // border: 1px solid #fff;
 
-    p.log, p.empty-log {
+    p.log,
+    p.empty-log {
       position: relative;
       height: 5%;
       color: #fff;
