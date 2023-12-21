@@ -470,7 +470,7 @@ section#terminal div.header-bar button#terminal-exit {
   top: 0;
   right: 0;
 }
-section#terminal div.log-area {
+section#terminal div#log-area {
   position: absolute;
   top: 6.5%;
   left: 50%;
@@ -478,15 +478,18 @@ section#terminal div.log-area {
           transform: translate(-50%, 0);
   height: 91%;
   width: 95%;
+  overflow-y: scroll;
 }
-section#terminal div.log-area p.log,
-section#terminal div.log-area p.empty-log {
+section#terminal div#log-area p.log,
+section#terminal div#log-area p.empty-log {
   position: relative;
-  height: 5%;
+  min-height: 5%;
+  margin-top: 3px;
   color: #fff;
   font-size: 100%;
+  text-wrap: wrap;
 }
-section#terminal div.log-area #I-beam {
+section#terminal div#log-area #I-beam {
   display: inline-block;
   position: absolute;
   top: 50%;

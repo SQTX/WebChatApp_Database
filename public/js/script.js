@@ -1,6 +1,6 @@
 // Includes:
-import { getNowTime, delay } from "./time.js";
-import { openTerminal } from "./terminal.js";
+import { delay } from "./time.js";
+import { openTerminal, printLog } from "./terminal.js";
 import { openAddFriendWindow } from "./addFriend.js";
 import { loadChatHeader, loadConversation, clearChat, sendNewMessage } from "./messSys.js";
 
@@ -30,6 +30,7 @@ const chatTextArea = document.getElementById("write-mess");
 // Calling the message sending function:
 sendBtn.addEventListener('click', (event) => {
   sendNewMessage(event, userID);
+  printLog("Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque est similique rerum non esse! Unde officia totam iste laudantium tenetur.");
 });
 chatTextArea.addEventListener('keypress', (event) => {
   if(event.key === 'Enter'){
