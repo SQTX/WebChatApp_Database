@@ -243,6 +243,49 @@ main section#chat-window div#chat {
   padding: 2%;
   overflow-y: scroll;
 }
+main section#chat-window div#chat div#load-chat {
+  position: relative;
+  min-height: 8vh;
+  width: 100%;
+  margin-bottom: 15px;
+  background-color: transparent;
+}
+main section#chat-window div#chat div#load-chat div.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  aspect-ratio: 1/1;
+  height: 60%;
+  border: 6px solid #f3f3f3;
+  /* Light grey */
+  border-top: 6px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(0deg);
+            transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(360deg);
+            transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(0deg);
+            transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  100% {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(360deg);
+            transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
 main section#chat-window div#chat div.message {
   min-height: 8%;
   width: -webkit-fit-content;
