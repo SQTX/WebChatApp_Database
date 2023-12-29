@@ -1,30 +1,11 @@
 const { createClientDB } = require("./databaseController");
 
 // =====================================================================================================
-// PUBLIC:
+// PRIVATE:
 // =====================================================================================================
-// TODO: Make this function more readable
-function friendsList(app, path) {
-  // Send friends number:
-  app.get("/friendsNumber", (req, res) => {
-    const client = createClientDB();
-    client
-      .connect()
-      .then(() => console.log("Connected successfuly"))
-      .then(() => client.query(`SELECT COUNT("email")
-                                FROM public."user"`))
-      .then((results) => {
-        let friendNumber = parseInt(results.rows[0].count);
-        friendNumber -= 1; // One of users in DB is not a friend (he's truly user)
-        const number = friendNumber.toString();
-        res.send(number);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => client.end());
-  });
-
-  // Send all data to frendsList:
-  for (let i = 0; i < 4; i++) {
+// Send all data to frendsList:
+function loadPathForUsers(app, path, userNumber) {
+  for (let i = 0; i < userNumber; i++) {
     app.get(`/chat/user${i}`, (req, res) => {
       const client = createClientDB();
       client
@@ -52,7 +33,7 @@ function friendsList(app, path) {
         .then(() => console.log("Connected successfuly"))
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
-          const friend = results.rows[i+1];
+          const friend = results.rows[i + 1];
           const profilePhoto = friend.profilePhoto;
           console.log("zdjecie:", profilePhoto);
           if (profilePhoto === "") {
@@ -65,12 +46,37 @@ function friendsList(app, path) {
           });
         })
         .catch((e) => console.log(e))
-        .finally(() => {
-          console.log("LogOUT");
-          client.end();
-        });
+        .finally(() => client.end());
     });
   }
+}
+
+// =====================================================================================================
+// PUBLIC:
+// =====================================================================================================
+// TODO: Make this function more readable
+function friendsList(app, path) {
+  // Send friends number:
+  app.get("/friendsNumber", (req, res) => {
+    const client = createClientDB();
+    client
+      .connect()
+      .then(() => console.log("Connected successfuly"))
+      .then(() =>
+        client.query(`SELECT COUNT("email")
+                      FROM public."user"`)
+      )
+      .then((results) => {
+        let friendNumber = parseInt(results.rows[0].count);
+        friendNumber -= 1; // One of users in DB is not a friend (he's truly user)
+        const number = friendNumber.toString();
+        console.log("Number", number);
+        loadPathForUsers(app, path, number);
+        res.send(number);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => client.end());
+  });
 }
 
 // =====================================================================================================

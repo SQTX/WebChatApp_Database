@@ -104,7 +104,7 @@ function loadAllConversations(app) {
     .then((results) => {
       const data = results.rows;
       let friendsID = [];
-      data.forEach((element) => friendsID.push(element));
+      data.forEach((idNum) => friendsID.push(idNum));
 
       const conversationNumber = friendsID.length;
 

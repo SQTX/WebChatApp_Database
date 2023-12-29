@@ -20,6 +20,7 @@ app.use(express.static(staticPath));                       // Use it
 // =====================================================================================================
 // Call backend functions:
 friendsList(app, path);           // Load friends list
+
 sendInboxSize(app);               // Get size of user inbox
 loadAllConversations(app);        // Load path for any conversation
 
