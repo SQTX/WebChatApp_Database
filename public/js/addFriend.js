@@ -3,10 +3,11 @@ function sendInvite(mailInput) {
 
   fetch(`/invite/${invEmail}`, {
     method: "POST",
-  }).then((r) => console.log("Send inv", invEmail));
-  //TODO
-}
+  });
 
+  location.reload();                   // NOTE: Refres app
+  console.log("Send inv", invEmail);
+}
 
 export function openAddFriendWindow() {
   const addFriendWindow = document.querySelector("section#add-friend");
