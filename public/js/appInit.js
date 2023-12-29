@@ -52,6 +52,8 @@ function createFriendDiv(nickname, lastMess, profilePhoto) {
 }
 
 function getUserFromServer() {
+  console.log("Load friend list")
+
   fetch("/friendsNumber", {
     method: "GET",
   }).then((r) =>
@@ -94,22 +96,22 @@ async function printMessages(chat, data, userID) {
   messBubble.scrollIntoView({ behavior: "smooth" });
 }
 
-const maxLimit = 5;
-const userID = "Daniel";
-const chat = document.getElementById("chat");
+// const maxLimit = 5;
+// const userID = "Daniel";
+// const chat = document.getElementById("chat");
 
-async function loadMessages(maxLimit) {
-  for (let i = 0; i < maxLimit; i++) {
-    await fetch(`/chat/Marcin/mess${i + 1}`, {
-      method: "GET",
-    }).then((r) => r.json().then((data) => printMessages(chat, data, userID)));
-  }
-}
+// async function loadMessages(maxLimit) {
+//   for (let i = 0; i < maxLimit; i++) {
+//     await fetch(`/chat/Marcin/mess${i + 1}`, {
+//       method: "GET",
+//     }).then((r) => r.json().then((data) => printMessages(chat, data, userID)));
+//   }
+// }
 
-async function loadChat() {
-  await fetch(`/chat/Marcin/size`, {
-    method: "GET",
-  }).then((r) => r.json().then((data) => loadMessages(data.inboxSize)));
-}
+// async function loadChat() {
+//   await fetch(`/chat/Marcin/size`, {
+//     method: "GET",
+//   }).then((r) => r.json().then((data) => loadMessages(data.inboxSize)));
+// }
 
-loadChat();
+// loadChat();
