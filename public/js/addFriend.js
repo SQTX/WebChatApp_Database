@@ -1,6 +1,9 @@
-function sendInvit(mailInput) {
-  const txt = mailInput.value;
-  console.log("Send inv", txt);
+function sendInvite(mailInput) {
+  const invEmail = mailInput.value;
+
+  fetch(`/invite/${invEmail}`, {
+    method: "POST",
+  }).then((r) => console.log("Send inv", invEmail));
   //TODO
 }
 
@@ -22,7 +25,7 @@ export function openAddFriendWindow() {
   const mailInput = document.getElementById("email-input");
 
   addFriendBtn.addEventListener('click', () => {
-    sendInvit(mailInput);  // TODO
+    sendInvite(mailInput);  // TODO
 
     mailInput.value = "";
     const addFriendWindow = document.querySelector("section#add-friend");
@@ -31,7 +34,7 @@ export function openAddFriendWindow() {
 
   mailInput.addEventListener('keypress', (event) => {
     if(event.key === 'Enter'){
-      sendInvit(mailInput);  // TODO
+      sendInvite(mailInput);  // TODO
 
       mailInput.value = "";
       const addFriendWindow = document.querySelector("section#add-friend");
