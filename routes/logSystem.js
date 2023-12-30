@@ -1,3 +1,5 @@
+var colors = require('colors');
+
 function getTime() {
   let now = new Date();
 
@@ -16,8 +18,8 @@ function getTime() {
 }
 
 // Settings:
-const dbActive = false;
-// const dbActive = true;
+// const dbActive = false;
+const dbActive = true;
 const errActive = false;
 // const errActive = true;
 
@@ -25,7 +27,15 @@ const errActive = false;
 function printLog(txt, type = 'normal') {
   const now = getTime();
   if(type === 'db' && !dbActive) return;
+  else if(type === 'db' && dbActive) {
+    console.log(`>[DB](${now}): ${txt}`.magenta);
+    return;
+  }
   if(type === 'err' && !errActive) return;
+  else if(type === 'err' && errActive) {
+    console.log(`>[ERR](${now}): ${txt}`.bgRed);
+    return;
+  }
   console.log(`>(${now}): ${txt}`);
 }
 
