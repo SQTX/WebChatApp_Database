@@ -19,7 +19,7 @@ function loadPathForUsers(app, path, userNumber) {
           printLog(`Load conversation with ${firstname} ${lastname} userID '${userID}' (profilePhoto: ${profilePhoto})`);
           res.json({ userID, firstname, lastname, profilePhoto });
         })
-        .catch((e) => console.log(e))
+        .catch((e) => printLog(e, 'err'))
         .finally(() => client.end());
     });
 
@@ -41,7 +41,7 @@ function loadPathForUsers(app, path, userNumber) {
             root: imgDiv,
           });
         })
-        .catch((e) => console.log(e))
+        .catch((e) => printLog(e, 'err'))
         .finally(() => client.end());
     });
   }
@@ -70,7 +70,7 @@ function friendsList(app, path) {
         loadPathForUsers(app, path, number);
         res.send(number);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => printLog(e, 'err'))
       .finally(() => client.end());
   });
 }

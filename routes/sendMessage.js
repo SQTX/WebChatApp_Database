@@ -17,7 +17,7 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
                     VALUES ('${inboxID}','${authorID}','${sentAt}','${messTxt}');`)
     )
     .then(() => printLog("Add new message to database."))
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 
@@ -35,7 +35,7 @@ function updateInboxData(inboxID, authorID, sentAt, messTxt) {
 	                  WHERE "inboxID"='${inboxID}';`)
     )
     .then(() => printLog(`Update data in inbox: ${inboxID}`))
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 
@@ -52,7 +52,6 @@ function sendMessage(app) {
     const authorID = req.params.authorID;
     const sentAt = req.params.sentAt;
     const messTxt = req.params.messTxt;
-    // console.log(inboxID, authorID, sentAt, messTxt);
 
     addNewMessageToDB(inboxID, authorID, sentAt, messTxt);
     updateInboxData(inboxID, authorID, sentAt, messTxt);

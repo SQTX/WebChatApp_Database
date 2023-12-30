@@ -25,7 +25,7 @@ function loadConversationPath(app, userID) {
         loadMessagesFromConversation(app, inboxID);
         res.send({ inboxID: inboxID });
       })
-      .catch((e) => console.log(e))
+      .catch((e) => printLog(e, 'err'))
       .finally(() => client.end());
   });
 }
@@ -58,7 +58,7 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
           const data = results.rows;
           res.send(data);
         })
-        .catch((e) => console.log(e))
+        .catch((e) => printLog(e, 'err'))
         .finally(() => client.end());
     }
   );
@@ -85,7 +85,7 @@ function sendInboxSize(app) {
         printLog("Conversation count:", count);
         res.send({ count: count });
       })
-      .catch((e) => console.log(e))
+      .catch((e) => printLog(e, 'err'))
       .finally(() => client.end());
   });
 }
@@ -115,7 +115,7 @@ function loadAllConversations(app) {
         printLog(`${i + 1}.Conversation for userID: '${friendID}' is loaded.`);
       }
     })
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 

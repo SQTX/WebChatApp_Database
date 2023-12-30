@@ -27,7 +27,7 @@ function addUserToFriendList(userData) {
       const { userID } = data;
       createInbox(userID);
     })
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 
@@ -49,7 +49,7 @@ function createInbox(userID) {
       const { inboxID } = results.rows[0];
       createConversation(userID, inboxID);
     })
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 
@@ -63,7 +63,7 @@ function createConversation(userID, inboxID) {
 	                  VALUES ('1', '${userID}', '${inboxID}');`)
     )
     .then(() => printLog("Added new friend to friend list"))
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 // =====================================================================================================
@@ -90,7 +90,7 @@ function inviteNewFriend(app) {
         addUserToFriendList(data);
       })
       .then(() => friendsList(app, path))
-      .catch((e) => console.log(e))
+      .catch((e) => printLog(e, 'err'))
       .finally(() => client.end());
   });
 }
