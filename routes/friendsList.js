@@ -11,7 +11,7 @@ function loadPathForUsers(app, path, userNumber) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => console.log("Connected successfuly"))
+        .then(() => printLog("Connected successfuly", 'db'))
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
           const friend = results.rows[i + 1];
@@ -28,7 +28,7 @@ function loadPathForUsers(app, path, userNumber) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => console.log("Connected successfuly"))
+        .then(() => printLog("Connected successfuly", 'db'))
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
           const friend = results.rows[i + 1];
@@ -57,7 +57,7 @@ function friendsList(app, path) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => console.log("Connected successfuly"))
+      .then(() => printLog("Connected successfuly", 'db'))
       .then(() =>
         client.query(`SELECT COUNT("email")
                       FROM public."user"`)

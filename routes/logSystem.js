@@ -15,8 +15,17 @@ function getTime() {
   return fullTime;
 }
 
-function printLog(txt) {
+// Settings:
+const dbActive = false;
+// const dbActive = true;
+const errActive = false;
+// const errActive = true;
+
+// Types: {normal, db, err}
+function printLog(txt, type = 'normal') {
   const now = getTime();
+  if(type === 'db' && !dbActive) return;
+  if(type === 'err' && !errActive) return;
   console.log(`>(${now}): ${txt}`);
 }
 

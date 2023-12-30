@@ -11,7 +11,7 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`INSERT INTO public."message"("inboxID", "authorID", "sentAt", "messTxt")
                     VALUES ('${inboxID}','${authorID}','${sentAt}','${messTxt}');`)
@@ -28,13 +28,13 @@ function updateInboxData(inboxID, authorID, sentAt, messTxt) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`UPDATE public."inbox"
                     SET "lastSentAuthor"='${authorID}', "lastMessTime"='${sentAt}', "lastMessText"='${messTxt}'
 	                  WHERE "inboxID"='${inboxID}';`)
     )
-    .then(() => printLog("Update data in inbox:", inboxID))
+    .then(() => printLog(`Update data in inbox: ${inboxID}`))
     .catch((e) => console.log(e))
     .finally(() => client.end());
 }

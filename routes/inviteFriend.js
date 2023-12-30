@@ -12,7 +12,7 @@ function addUserToFriendList(userData) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`INSERT INTO public."user"(
 	                    "firstname", "lastname", "profilePhoto", "email", "password")
@@ -35,7 +35,7 @@ function createInbox(userID) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`INSERT INTO public."inbox"("lastSentAuthor", "lastMessTime", "lastMessText")
 	                    VALUES (null, null, null);`)
@@ -57,7 +57,7 @@ function createConversation(userID, inboxID) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`INSERT INTO public."conversation"("userID", "friendID", "inboxID")
 	                  VALUES ('1', '${userID}', '${inboxID}');`)
@@ -79,7 +79,7 @@ function inviteNewFriend(app) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => console.log("Connected successfuly"))
+      .then(() => printLog("Connected successfuly", 'db'))
       .then(() =>
         client.query(`SELECT *
                       FROM public."person"

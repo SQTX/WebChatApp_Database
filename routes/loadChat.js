@@ -12,7 +12,7 @@ function loadConversationPath(app, userID) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => console.log("Connected successfuly"))
+      .then(() => printLog("Connected successfuly", 'db'))
       .then(() =>
         client.query(`SELECT "inboxID"
                       FROM public."conversation"
@@ -21,7 +21,7 @@ function loadConversationPath(app, userID) {
       .then((results) => {
         const inbox = results.rows[0];
         const { inboxID } = inbox;
-        printLog("Searching inbox:", inboxID);
+        printLog(`Searching inbox: ${inboxID}`);
         loadMessagesFromConversation(app, inboxID);
         res.send({ inboxID: inboxID });
       })
@@ -46,7 +46,7 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => console.log("Connected successfuly"))
+        .then(() => printLog("Connected successfuly", 'db'))
         .then(() =>
           client.query(`SELECT *
                       FROM public."message"
@@ -75,7 +75,7 @@ function sendInboxSize(app) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => console.log("Connected successfuly"))
+      .then(() => printLog("Connected successfuly", 'db'))
       .then(() =>
         client.query(`SELECT COUNT("convID")
                       FROM public."conversation";`)
@@ -97,7 +97,7 @@ function loadAllConversations(app) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`SELECT "friendID"
                     FROM public."conversation";`)
