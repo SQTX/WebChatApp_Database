@@ -1,4 +1,5 @@
 const { createClientDB } = require("./databaseController");
+const printLog = require('./logSystem');
 
 // =====================================================================================================
 // PRIVATE:
@@ -20,7 +21,7 @@ function loadConversationPath(app, userID) {
       .then((results) => {
         const inbox = results.rows[0];
         const { inboxID } = inbox;
-        console.log("Searching inbox:", inboxID);
+        printLog("Searching inbox:", inboxID);
         loadMessagesFromConversation(app, inboxID);
         res.send({ inboxID: inboxID });
       })
@@ -81,7 +82,7 @@ function sendInboxSize(app) {
       )
       .then((results) => {
         const count = Number(results.rows[0].count);
-        console.log("Conversation count:", count);
+        printLog("Conversation count:", count);
         res.send({ count: count });
       })
       .catch((e) => console.log(e))
@@ -111,7 +112,7 @@ function loadAllConversations(app) {
       for (let i = 0; i < conversationNumber; i++) {
         const { friendID } = friendsID[i];
         loadConversationPath(app, friendID);
-        console.log(`${i + 1}. Conversation for`, friendID, "is loaded.");
+        printLog(`${i + 1}.Conversation for userID: '${friendID}' is loaded.`);
       }
     })
     .catch((e) => console.log(e))

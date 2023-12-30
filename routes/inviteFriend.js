@@ -1,13 +1,13 @@
+const path = require('path');         // Path module
 const { createClientDB } = require("./databaseController");
 const friendsList = require('./friendsList');
-const path = require('path');         // Path module
+const printLog = require('./logSystem');
 
 // =====================================================================================================
 // PRIVATE:
 // =====================================================================================================
 function addUserToFriendList(userData) {
   const { firstname, lastname, profilePhoto, email, password } = userData;
-  // console.log(firstname, lastname, profilePhoto, email, password);
 
   const client = createClientDB();
   client
@@ -25,7 +25,6 @@ function addUserToFriendList(userData) {
     .then((results) => {
       const data = results.rows[0];
       const { userID } = data;
-      console.log("Lujec:", userID);
       createInbox(userID);
     })
     .catch((e) => console.log(e))
@@ -55,9 +54,6 @@ function createInbox(userID) {
 }
 
 function createConversation(userID, inboxID) {
-  console.log("User:", userID);
-  console.log("Inbox:", inboxID);
-
   const client = createClientDB();
   client
     .connect()
@@ -66,7 +62,7 @@ function createConversation(userID, inboxID) {
       client.query(`INSERT INTO public."conversation"("userID", "friendID", "inboxID")
 	                  VALUES ('1', '${userID}', '${inboxID}');`)
     )
-    .then(() => console.log("Added new friend to friend list"))
+    .then(() => printLog("Added new friend to friend list"))
     .catch((e) => console.log(e))
     .finally(() => client.end());
 }
@@ -76,7 +72,7 @@ function createConversation(userID, inboxID) {
 function inviteNewFriend(app) {
   app.post("/invite/:email", (req, res) => {
     const invEmail = req.params.email;
-    console.log(`Invite firiend with "${invEmail}" address email`);
+    printLog(`Invite firiend with "${invEmail}" address email`);
 
     // mail filter() TODO
 
@@ -91,14 +87,11 @@ function inviteNewFriend(app) {
       )
       .then((results) => {
         const data = results.rows[0];
-        console.log(data);
         addUserToFriendList(data);
       })
       .then(() => friendsList(app, path))
       .catch((e) => console.log(e))
       .finally(() => client.end());
-    // createFriendInbox()
-    // createConversation()
   });
 }
 

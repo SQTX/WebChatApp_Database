@@ -1,4 +1,5 @@
 const { createClientDB } = require("./databaseController");
+const printLog = require('./logSystem');
 
 // =====================================================================================================
 // PRIVATE:
@@ -15,7 +16,7 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
       client.query(`INSERT INTO public."message"("inboxID", "authorID", "sentAt", "messTxt")
                     VALUES ('${inboxID}','${authorID}','${sentAt}','${messTxt}');`)
     )
-    .then(() => console.log("Add new message to database."))
+    .then(() => printLog("Add new message to database."))
     .catch((e) => console.log(e))
     .finally(() => client.end());
 }
@@ -33,7 +34,7 @@ function updateInboxData(inboxID, authorID, sentAt, messTxt) {
                     SET "lastSentAuthor"='${authorID}', "lastMessTime"='${sentAt}', "lastMessText"='${messTxt}'
 	                  WHERE "inboxID"='${inboxID}';`)
     )
-    .then(() => console.log("Update data in inbox:", inboxID))
+    .then(() => printLog("Update data in inbox:", inboxID))
     .catch((e) => console.log(e))
     .finally(() => client.end());
 }
@@ -51,7 +52,7 @@ function sendMessage(app) {
     const authorID = req.params.authorID;
     const sentAt = req.params.sentAt;
     const messTxt = req.params.messTxt;
-    console.log(inboxID, authorID, sentAt, messTxt);
+    // console.log(inboxID, authorID, sentAt, messTxt);
 
     addNewMessageToDB(inboxID, authorID, sentAt, messTxt);
     updateInboxData(inboxID, authorID, sentAt, messTxt);
