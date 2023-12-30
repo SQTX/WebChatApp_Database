@@ -75,6 +75,47 @@ function friendsList(app, path) {
   });
 }
 
+function getConversation(app) {
+  app.get("/chat/conv/:userID/:friendID", (req, res) => {
+    const client = createClientDB();
+    client
+      .connect()
+      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() =>
+        client.query(`SELECT *
+                      FROM public."conversation"
+                      WHERE ("userID" = '${req.params.userID}'
+                      AND "friendID" = '${req.params.friendID}');`)
+      )
+      .then((results) => {
+        const convData = results.rows[0];
+        res.send(convData);
+      })
+      .catch((e) => printLog(e, 'err'))
+      .finally(() => client.end());
+  });
+}
+
+function getInbox(app) {
+  app.get("/chat/inbox/:id", (req, res) => {
+    const client = createClientDB();
+    client
+      .connect()
+      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() =>
+        client.query(`SELECT *
+                      FROM public."inbox"
+                      WHERE ("inboxID" = '${req.params.id}');`)
+      )
+      .then((results) => {
+        const inboxData = results.rows[0];
+        res.send(inboxData);
+      })
+      .catch((e) => printLog(e, 'err'))
+      .finally(() => client.end());
+  });
+}
+
 // =====================================================================================================
 // Export:
-module.exports = friendsList;
+module.exports = { friendsList, getConversation, getInbox };

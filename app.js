@@ -2,7 +2,7 @@
 const express = require('express');   // Express framework
 const path = require('path');         // Path module
 // Files:
-const friendsList = require('./routes/friendsList');
+const { friendsList, getConversation, getInbox } = require('./routes/friendsList');
 const { sendInboxSize, loadAllConversations } = require('./routes/loadChat');
 const inviteNewFriend = require("./routes/inviteFriend");
 const sendMessage = require('./routes/sendMessage');
@@ -21,6 +21,8 @@ app.use(express.static(staticPath));                       // Use it
 // =====================================================================================================
 // Call backend functions:
 printLog("Load initial functions");
+getConversation(app);
+getInbox(app);
 friendsList(app, path);           // Load friends list
 sendInboxSize(app);               // Get size of user inbox
 loadAllConversations(app);        // Load path for any conversation

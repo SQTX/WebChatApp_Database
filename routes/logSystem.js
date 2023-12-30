@@ -18,8 +18,8 @@ function getTime() {
 }
 
 // Settings:
-// const dbActive = false;
-const dbActive = true;
+const dbActive = false;
+// const dbActive = true;
 const errActive = false;
 // const errActive = true;
 
