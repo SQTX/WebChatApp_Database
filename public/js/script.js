@@ -53,6 +53,10 @@ delay(750).then(() => {
   console.log(friends);
   friends.forEach((friend) => {
     friend.addEventListener("click", () => {
+      const prevActivFriend = document.querySelector("div.friend.active");
+      if(prevActivFriend) prevActivFriend.classList.remove('active');
+      friend.classList.add('active')
+
       const friendID = friend.getAttribute("friendid");
       const nicknameP = friend.querySelector("span p.nickname");
       const nickname = nicknameP.innerText;
