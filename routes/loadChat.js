@@ -1,4 +1,5 @@
 const { createClientDB } = require("./databaseController");
+const printLog = require('./logSystem');
 
 // =====================================================================================================
 // PRIVATE:
@@ -11,7 +12,7 @@ function loadConversationPath(app, userID) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => console.log("Connected successfuly"))
+      .then(() => printLog("Connected successfuly", 'db'))
       .then(() =>
         client.query(`SELECT "inboxID"
                       FROM public."conversation"
@@ -20,11 +21,11 @@ function loadConversationPath(app, userID) {
       .then((results) => {
         const inbox = results.rows[0];
         const { inboxID } = inbox;
-        console.log("Searching inbox:", inboxID);
+        printLog(`Searching inbox: ${inboxID}`);
         loadMessagesFromConversation(app, inboxID);
         res.send({ inboxID: inboxID });
       })
-      .catch((e) => console.log(e))
+      .catch((e) => printLog(e, 'err'))
       .finally(() => client.end());
   });
 }
@@ -45,7 +46,7 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => console.log("Connected successfuly"))
+        .then(() => printLog("Connected successfuly", 'db'))
         .then(() =>
           client.query(`SELECT *
                       FROM public."message"
@@ -57,7 +58,7 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
           const data = results.rows;
           res.send(data);
         })
-        .catch((e) => console.log(e))
+        .catch((e) => printLog(e, 'err'))
         .finally(() => client.end());
     }
   );
@@ -74,17 +75,17 @@ function sendInboxSize(app) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => console.log("Connected successfuly"))
+      .then(() => printLog("Connected successfuly", 'db'))
       .then(() =>
         client.query(`SELECT COUNT("convID")
                       FROM public."conversation";`)
       )
       .then((results) => {
         const count = Number(results.rows[0].count);
-        console.log("Conversation count:", count);
+        printLog("Conversation count:", count);
         res.send({ count: count });
       })
-      .catch((e) => console.log(e))
+      .catch((e) => printLog(e, 'err'))
       .finally(() => client.end());
   });
 }
@@ -96,7 +97,7 @@ function loadAllConversations(app) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`SELECT "friendID"
                     FROM public."conversation";`)
@@ -111,10 +112,10 @@ function loadAllConversations(app) {
       for (let i = 0; i < conversationNumber; i++) {
         const { friendID } = friendsID[i];
         loadConversationPath(app, friendID);
-        console.log(`${i + 1}. Conversation for`, friendID, "is loaded.");
+        printLog(`${i + 1}.Conversation for userID: '${friendID}' is loaded.`);
       }
     })
-    .catch((e) => console.log(e))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 

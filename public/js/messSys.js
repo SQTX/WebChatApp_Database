@@ -64,12 +64,10 @@ function loadMessages(data) {
   });
 }
 
-
 function removeLoadBar() {
   const loadBar = document.getElementById("load-chat");
   if (loadBar) loadBar.remove();
 }
-
 
 function loadOlderMessages() {
   const inboxID = chat.getAttribute("active-inbox");
@@ -155,6 +153,11 @@ export function sendNewMessage(event, userID) {
   fetch(url, {
     method: "POST",
   });
+
+  delay(250).then(() => {
+    const activeFriendDiv = document.querySelector("div.friend.active");
+    loadLastMess(inboxID, activeFriendDiv)
+  })
 }
 
 // Load chat conversation with friend:
@@ -179,7 +182,6 @@ export function loadConversation(friendID, lastMessTime = 0) {
   );
 }
 
-
 export function addLoadBar() {
   const loadBar = document.createElement("div");
   loadBar.id = "load-chat";
@@ -193,4 +195,15 @@ export function addLoadBar() {
     removeLoadBar();
     loadOlderMessages();
   });
+}
+
+export function loadLastMess(inboxID, divFriend) {
+  fetch(`/chat/inbox/${inboxID}`, {
+    method: "GET",
+  }).then((r) =>
+    r.json().then((inboxData) => {
+      const lastMess = divFriend.querySelector("p.last-message");
+      lastMess.innerText = inboxData.lastMessText;
+    })
+  );
 }

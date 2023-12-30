@@ -1,4 +1,5 @@
 const { createClientDB } = require("./databaseController");
+const printLog = require('./logSystem');
 
 // =====================================================================================================
 // PRIVATE:
@@ -10,13 +11,13 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`INSERT INTO public."message"("inboxID", "authorID", "sentAt", "messTxt")
                     VALUES ('${inboxID}','${authorID}','${sentAt}','${messTxt}');`)
     )
-    .then(() => console.log("Add new message to database."))
-    .catch((e) => console.log(e))
+    .then(() => printLog("Add new message to database."))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 
@@ -27,14 +28,14 @@ function updateInboxData(inboxID, authorID, sentAt, messTxt) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => console.log("Connected successfuly"))
+    .then(() => printLog("Connected successfuly", 'db'))
     .then(() =>
       client.query(`UPDATE public."inbox"
                     SET "lastSentAuthor"='${authorID}', "lastMessTime"='${sentAt}', "lastMessText"='${messTxt}'
 	                  WHERE "inboxID"='${inboxID}';`)
     )
-    .then(() => console.log("Update data in inbox:", inboxID))
-    .catch((e) => console.log(e))
+    .then(() => printLog(`Update data in inbox: ${inboxID}`))
+    .catch((e) => printLog(e, 'err'))
     .finally(() => client.end());
 }
 
@@ -51,7 +52,6 @@ function sendMessage(app) {
     const authorID = req.params.authorID;
     const sentAt = req.params.sentAt;
     const messTxt = req.params.messTxt;
-    console.log(inboxID, authorID, sentAt, messTxt);
 
     addNewMessageToDB(inboxID, authorID, sentAt, messTxt);
     updateInboxData(inboxID, authorID, sentAt, messTxt);

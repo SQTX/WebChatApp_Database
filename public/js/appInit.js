@@ -1,17 +1,32 @@
 // TODO: Make clean this file
+const userID = 1;
 // Connection with backend
 const friendsList = document.getElementById("friends-list");
 
+import { loadLastMess } from "./messSys.js";
+
 function addFriendToList(data) {
-  const userID = data.userID;
+  const friendID = data.userID;
   let nickname = data.firstname + " " + data.lastname;
 
-  const lastMess = "Lorem ipsum dolor sit amet.";
+  const lastMess = "Lorem ipsum dolor sit amet."; // TODO
   const profilePhoto =
     data.profilePhoto === "" ? "defaultPhoto.jpg" : data.profilePhoto;
 
   const divFriend = createFriendDiv(nickname, lastMess, profilePhoto);
-  divFriend.setAttribute("friendID", userID);
+  divFriend.setAttribute("friendID", friendID);
+
+  fetch(`/chat/conv/${userID}/${friendID}`, {
+    method: "GET",
+  }).then((r) =>
+    r.json().then((convData) => {
+      divFriend.setAttribute("convID", convData.convID);
+      divFriend.setAttribute("inboxID", convData.inboxID);
+
+      loadLastMess(convData.inboxID, divFriend);
+    })
+  );
+
   // TODO: Sprawdzenie czy friendID jest w bazie danych zanjomych konkretnej osoby
   friendsList.appendChild(divFriend);
 
@@ -52,7 +67,7 @@ function createFriendDiv(nickname, lastMess, profilePhoto) {
 }
 
 function getUserFromServer() {
-  console.log("Load friend list")
+  console.log("Load friend list");
 
   fetch("/friendsNumber", {
     method: "GET",
