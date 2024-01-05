@@ -21,7 +21,7 @@ const certificate = fs.readFileSync('keys\\client_cert.pem', 'utf8');   // Get a
 const credentials = { key: privateKey, cert: certificate };
 const httpsServer = https.createServer(credentials, app);   // Create HTTPS server
 
-httpsServer.listen(3000, () => console.log("Server is online"));   // Open port 3000 on localhost
+httpsServer.listen(3000, () => printLog("Server is online"));   // Open port 3000 on localhost
 
 const staticPath = path.join(__dirname, "/public");        // Set static path to frontend files
 app.use(express.static(staticPath));                       // Use it
