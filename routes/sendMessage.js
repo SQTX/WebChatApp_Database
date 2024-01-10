@@ -22,6 +22,19 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
 }
 
 /**
+ * parameterized
+ */
+/*function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
+  const pgp = require('pg-promise')();
+  const client = pgp(createClientDB());
+  client.none('INSERT INTO public."message"("inboxID", "authorID", "sentAt", "messTxt") VALUES ($1, $2, $3, $4)',
+      [inboxID, authorID, sentAt, messTxt])
+      .then(() => console.log("Add new message to database."))
+      .catch(error => console.error(error))
+      .finally(() => pgp.end());
+}*/
+
+/**
  * Update information about last message in inbox table.
  */
 function updateInboxData(inboxID, authorID, sentAt, messTxt) {
