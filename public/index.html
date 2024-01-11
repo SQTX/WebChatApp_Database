@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebChatApp_DB</title>
+  <!-- Favicon (Flaticon.com): -->
+  <link rel="shortcut icon" type="image/png" href="img/web-chat.png"/>
+  <!-- Fonts: -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet: -->
+  <link rel="stylesheet" href="./css/style.min.css">
+</head>
+<body>
+  <header>
+    <h1>WebChatApp_DB</h1>
+    <button id="settings-btn">
+      <i class="fa-solid fa-gears"></i>
+    </button>
+  </header>
+  <main>
+    <menu>
+      <li class="option">Dodaj użytkownika</li>
+      <li class="option">Wyświetl logi</li>
+    </menu>
+    <section id="friends-list">
+      <!-- <div class="friend">
+        <span class="friend-text">
+          <p class="nickname">Marcin Grognałer</p>
+          <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        </span>
+        <div class="profile-img">
+          <img class="profile-photo" src="img/friend-1.jpg" alt="">
+        </div>
+      </div>
+      <div class="friend">
+        <span class="friend-text">
+          <p class="nickname">Marta Skura</p>
+          <p class="last-message">Lorem ipsum dolor sit amet.</p>
+        </span>
+        <div class="profile-img">
+          <img class="profile-photo" src="img/friend-2.jpg" alt="">
+        </div>
+      </div>
+      <div class="friend">
+        <span class="friend-text">
+          <p class="nickname">Marcinek Ściemniacz</p>
+          <p class="last-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas delectus officia ducimus nobis corrupti id tenetur odio culpa, facilis dignissimos!</p>
+        </span>
+        <div class="profile-img">
+          <img class="profile-photo" src="img/friend-3.jpg" alt="">
+        </div>
+      </div> -->
+    </section>
+    <section id="chat-window">
+      <div id="chat-header">
+        <div class="profile-img">
+          <!-- <img class="active profile-photo" src="img/friend-1.jpg" alt=""> -->
+          <img class="active profile-photo" src="" alt="">
+        </div>
+        <!-- <p class="nickname">Marcin Grognałer</p> -->
+        <p class="nickname"></p>
+        <div class="status online active">
+          <div class="status-dot"></div>
+          <p class="status-txt">Active</p>
+        </div>
+        <div class="status offline">
+          <div class="status-dot "></div>
+          <p class="status-txt">No active</p>
+        </div>
+      </div>
+      <div id="chat">
+        <!-- <div id="load-chat"><div class="loader"></div></div> -->
+        <!-- <div class="message user-mess">
+          <p>Lorem1 ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div class="message friend-mess">
+          <p>Lorem2 ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div> -->
+      </div>
+      <div id="write-area">
+        <textarea id="write-mess" placeholder="Write a message" cols="30" rows="2"></textarea>
+        <button id="sendBtn">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p class="credits">University project created by <b>Konrad Krzysztoszek</b> & <b>Jakub Sitarczyk</b>&copy;</p>
+  </footer>
+
+  <section id="add-friend">
+    <div class="header-bar">
+      <p>Add new friend</p>
+      <button id="af-windows-exit" title="Exit"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <input id="email-input" type="email" placeholder="Write a friend email">
+    <button id="send-invit">Add friend</button>
+  </section>
+
+  <section id="terminal">
+    <div class="header-bar">
+      <p>Log history</p>
+      <button id="terminal-clear" title="Clear"><i class="fa-solid fa-broom"></i></button>
+      <button id="terminal-exit" title="Exit"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="log-area">
+      <!-- <p class="log">> Test1</p>
+      <p class="log">> Test2</p> -->
+      <p class="empty-log">> <span id="I-beam"></span></p>
+    </div>
+  </section>
+
+  <script type="module" src="js/appInit.js"></script>
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
