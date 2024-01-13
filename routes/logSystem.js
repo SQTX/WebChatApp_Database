@@ -1,3 +1,5 @@
+const winston = require('winston');   // Winston module
+
 var colors = require('colors');
 
 function getTime() {
@@ -24,7 +26,7 @@ const errActive = false;
 // const errActive = true;
 
 // Types: {normal, db, err}
-function printLog(txt, type = 'normal') {
+function printLog2(txt, type = 'normal') {
   const now = getTime();
   if(type === 'db' && !dbActive) return;
   else if(type === 'db' && dbActive) {
@@ -39,4 +41,72 @@ function printLog(txt, type = 'normal') {
   console.log(`>(${now}): ${txt}`);
 }
 
+const logLevels = require('./loggers');
+
+const cliLogger = winston.loggers.get('cliLogger');
+const allLoggerFile = winston.loggers.get('allLoggerFile');
+const serverFile = winston.loggers.get('serverFile');
+const dbFile = winston.loggers.get('dbFile');
+
+const loggersLevels = {
+  levels: {
+    error: 0,
+    warn: 1,
+    debug: 2,
+    server: 3,
+    database: 4,
+    http: 5,
+    info: 6
+  }
+};
+
+const allLevels = ['error', 'warn', 'debug', 'server', 'database', 'http', 'info']
+
+function printLog(mess, level = 'server', errMess = "") {
+  let logLevel = 0;
+
+  allLevels.forEach((lvl, i) => {
+    if(level === lvl) logLevel = i;
+  })
+
+  switch(logLevel) {
+    case 0:
+      cliLogger.error(`${mess}`, new Error(errMess));
+      allLoggerFile.error(`${mess}`, new Error(errMess));
+      break;
+    case 1:
+      cliLogger.warn(`${mess}`);
+      allLoggerFile.warn(`${mess}`);
+      break;
+    case 2:
+      cliLogger.debug(`${mess}`);
+      allLoggerFile.debug(`${mess}`);
+      break;
+    case 3:
+      cliLogger.server(`${mess}`);
+      serverFile.server(`${mess}`);
+      allLoggerFile.server(`${mess}`);
+      break;
+    case 4:
+      cliLogger.database(`${mess}`);
+      dbFile.database(`${mess}`);
+      allLoggerFile.database(`${mess}`);
+      break;
+    case 5:
+      cliLogger.http(`${mess}`);
+      allLoggerFile.http(`${mess}`);
+      break;
+    case 6:
+      cliLogger.info(`${mess}`);
+      allLoggerFile.info(`${mess}`);
+      break;
+    default:
+      break;
+  }
+}
+
+
 module.exports = printLog;
+
+
+

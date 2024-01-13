@@ -31,3 +31,5 @@ loadAllConversations(app);        // Load path for any conversation
 printLog("Load other functions");
 inviteNewFriend(app);
 sendMessage(app);                 // Load path for sending new messages
+
+printLog("chuj");
