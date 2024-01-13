@@ -12,7 +12,7 @@ function addUserToFriendList(userData) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => printLog("Connected successfuly", 'db'))
+    .then(() => printLog("Connected with database successfuly [7]", 'database'))
     .then(() =>
       client.query(`INSERT INTO public."user"(
 	                    "firstname", "lastname", "profilePhoto", "email", "password")
@@ -27,7 +27,7 @@ function addUserToFriendList(userData) {
       const { userID } = data;
       createInbox(userID);
     })
-    .catch((e) => printLog(e, 'err'))
+    .catch((e) => printLog("Cannot connected with database [7]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
 
@@ -35,7 +35,7 @@ function createInbox(userID) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => printLog("Connected successfuly", 'db'))
+    .then(() => printLog("Connected with database successfuly [8]", 'database'))
     .then(() =>
       client.query(`INSERT INTO public."inbox"("lastSentAuthor", "lastMessTime", "lastMessText")
 	                    VALUES (null, null, null);`)
@@ -49,7 +49,7 @@ function createInbox(userID) {
       const { inboxID } = results.rows[0];
       createConversation(userID, inboxID);
     })
-    .catch((e) => printLog(e, 'err'))
+    .catch((e) => printLog("Cannot connected with database [8]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
 
@@ -57,13 +57,13 @@ function createConversation(userID, inboxID) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => printLog("Connected successfuly", 'db'))
+    .then(() => printLog("Connected with database successfuly [9]", 'database'))
     .then(() =>
       client.query(`INSERT INTO public."conversation"("userID", "friendID", "inboxID")
 	                  VALUES ('1', '${userID}', '${inboxID}');`)
     )
-    .then(() => printLog("Added new friend to friend list"))
-    .catch((e) => printLog(e, 'err'))
+    .then(() => printLog("Added new friend ('${userID}') to friend list", 'database'))
+    .catch((e) => printLog("Cannot connected with database [9]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
 // =====================================================================================================
@@ -72,14 +72,14 @@ function createConversation(userID, inboxID) {
 function inviteNewFriend(app) {
   app.post("/invite/:email", (req, res) => {
     const invEmail = req.params.email;
-    printLog(`Invite firiend with "${invEmail}" address email`);
+    printLog(`Invite firiend with "${invEmail}" address email`, 'debug');
 
     // mail filter() TODO
 
     const client = createClientDB();
     client
       .connect()
-      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() => printLog("Connected with database successfuly [10]", 'database'))
       .then(() =>
         client.query(`SELECT *
                       FROM public."person"
@@ -90,7 +90,7 @@ function inviteNewFriend(app) {
         addUserToFriendList(data);
       })
       .then(() => friendsList(app, path))
-      .catch((e) => printLog(e, 'err'))
+      .catch((e) => printLog("Cannot connected with database [10]: ", 'error', new Error(e)))
       .finally(() => client.end());
   });
 }

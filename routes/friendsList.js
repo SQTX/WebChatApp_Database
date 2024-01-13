@@ -11,15 +11,15 @@ function loadPathForUsers(app, path, userNumber) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => printLog("Connected successfuly", 'db'))
+        .then(() => printLog("Connected with database successfuly [11]", 'database'))
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
           const friend = results.rows[i + 1];
           const { userID, firstname, lastname, profilePhoto } = friend;
-          printLog(`Load conversation with ${firstname} ${lastname} userID '${userID}' (profilePhoto: ${profilePhoto})`);
+          printLog(`Load conversation with ${firstname} ${lastname} userID '${userID}' (profilePhoto: ${profilePhoto})`, 'server');
           res.json({ userID, firstname, lastname, profilePhoto });
         })
-        .catch((e) => printLog(e, 'err'))
+        .catch((e) => printLog("Cannot connected with database [11]: ", 'error', new Error(e)))
         .finally(() => client.end());
     });
 
@@ -28,20 +28,19 @@ function loadPathForUsers(app, path, userNumber) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => printLog("Connected successfuly", 'db'))
+        .then(() => printLog("Connected with database successfuly [12]", 'database'))
         .then(() => client.query(`SELECT * FROM public."user"`))
         .then((results) => {
           const friend = results.rows[i + 1];
           const profilePhoto = friend.profilePhoto;
-          printLog(`Photo: ${profilePhoto}`);
           if (profilePhoto === "") profilePhoto = "defaultPhoto.jpg"
 
-          printLog(`${profilePhoto}`);
+          printLog(`PhotoName is '${profilePhoto}'`, 'debug');
           res.sendFile(profilePhoto, {
             root: imgDiv,
           });
         })
-        .catch((e) => printLog(e, 'err'))
+        .catch((e) => printLog("Cannot connected with database [12]: ", 'error', new Error(e)))
         .finally(() => client.end());
     });
   }
@@ -57,7 +56,7 @@ function friendsList(app, path) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() => printLog("Connected with database successfuly [13]", 'database'))
       .then(() =>
         client.query(`SELECT COUNT("email")
                       FROM public."user"`)
@@ -66,11 +65,11 @@ function friendsList(app, path) {
         let friendNumber = parseInt(results.rows[0].count);
         friendNumber -= 1; // One of users in DB is not a friend (he's truly user)
         const number = friendNumber.toString();
-        // printLog(`Friend number: '${number}'`);
+        // printLog(`Friend number: '${number}'`, 'debug');
         loadPathForUsers(app, path, number);
         res.send(number);
       })
-      .catch((e) => printLog(e, 'err'))
+      .catch((e) => printLog("Cannot connected with database [13]: ", 'error', new Error(e)))
       .finally(() => client.end());
   });
 }
@@ -80,7 +79,7 @@ function getConversation(app) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() => printLog("Connected with database successfuly [14]", 'database'))
       .then(() =>
         client.query(`SELECT *
                       FROM public."conversation"
@@ -91,7 +90,7 @@ function getConversation(app) {
         const convData = results.rows[0];
         res.send(convData);
       })
-      .catch((e) => printLog(e, 'err'))
+      .catch((e) => printLog("Cannot connected with database [14]: ", 'error', new Error(e)))
       .finally(() => client.end());
   });
 }
@@ -101,7 +100,7 @@ function getInbox(app) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() => printLog("Connected with database successfuly [15]", 'database'))
       .then(() =>
         client.query(`SELECT *
                       FROM public."inbox"
@@ -111,7 +110,7 @@ function getInbox(app) {
         const inboxData = results.rows[0];
         res.send(inboxData);
       })
-      .catch((e) => printLog(e, 'err'))
+      .catch((e) => printLog("Cannot connected with database [15]: ", 'error', new Error(e)))
       .finally(() => client.end());
   });
 }

@@ -12,7 +12,7 @@ function loadConversationPath(app, userID) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() => printLog("Connected with database successfuly [3]", 'database'))
       .then(() =>
         client.query(`SELECT "inboxID"
                       FROM public."conversation"
@@ -21,11 +21,11 @@ function loadConversationPath(app, userID) {
       .then((results) => {
         const inbox = results.rows[0];
         const { inboxID } = inbox;
-        printLog(`Searching inbox: ${inboxID}`);
+        printLog(`Searching inbox with '${inboxID}' ID`, 'debug');
         loadMessagesFromConversation(app, inboxID);
         res.send({ inboxID: inboxID });
       })
-      .catch((e) => printLog(e, 'err'))
+      .catch((e) => printLog("Cannot connected with database [3]: ", 'error', new Error(e)))
       .finally(() => client.end());
   });
 }
@@ -46,7 +46,7 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
       const client = createClientDB();
       client
         .connect()
-        .then(() => printLog("Connected successfuly", 'db'))
+        .then(() => printLog("Connected with database successfuly [4]", 'database'))
         .then(() =>
           client.query(`SELECT *
                       FROM public."message"
@@ -58,7 +58,7 @@ function loadMessagesFromConversation(app, inboxID, messNumber = 10) {
           const data = results.rows;
           res.send(data);
         })
-        .catch((e) => printLog(e, 'err'))
+        .catch((e) => printLog("Cannot connected with database [4]: ", 'error', new Error(e)))
         .finally(() => client.end());
     }
   );
@@ -75,17 +75,17 @@ function sendInboxSize(app) {
     const client = createClientDB();
     client
       .connect()
-      .then(() => printLog("Connected successfuly", 'db'))
+      .then(() => printLog("Connected with database successfuly [5]", 'database'))
       .then(() =>
         client.query(`SELECT COUNT("convID")
                       FROM public."conversation";`)
       )
       .then((results) => {
         const count = Number(results.rows[0].count);
-        printLog("Conversation count:", count);
+        printLog(`Conversation count is ${count}`, 'debug');
         res.send({ count: count });
       })
-      .catch((e) => printLog(e, 'err'))
+      .catch((e) => printLog("Cannot connected with database [5]: ", 'error', new Error(e)))
       .finally(() => client.end());
   });
 }
@@ -97,7 +97,7 @@ function loadAllConversations(app) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => printLog("Connected successfuly", 'db'))
+    .then(() => printLog("Connected with database successfuly [6]", 'database'))
     .then(() =>
       client.query(`SELECT "friendID"
                     FROM public."conversation";`)
@@ -112,10 +112,10 @@ function loadAllConversations(app) {
       for (let i = 0; i < conversationNumber; i++) {
         const { friendID } = friendsID[i];
         loadConversationPath(app, friendID);
-        printLog(`${i + 1}.Conversation for userID: '${friendID}' is loaded.`);
+        printLog(`Conversation for userID '${friendID}' has loaded.`, 'debug');
       }
     })
-    .catch((e) => printLog(e, 'err'))
+    .catch((e) => printLog("Cannot connected with database [6]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
 

@@ -11,13 +11,13 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => printLog("Connected successfuly", 'db'))
+    .then(() => printLog("Connected with database successfuly [1]", 'database'))
     .then(() =>
       client.query(`INSERT INTO public."message"("inboxID", "authorID", "sentAt", "messTxt")
                     VALUES ('${inboxID}','${authorID}','${sentAt}','${messTxt}');`)
     )
-    .then(() => printLog("Add new message to database."))
-    .catch((e) => printLog(e, 'err'))
+    .then(() => printLog("Add new message to database.", 'database'))
+    .catch((e) => printLog("Cannot connected with database [1]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
 
@@ -28,14 +28,14 @@ function updateInboxData(inboxID, authorID, sentAt, messTxt) {
   const client = createClientDB();
   client
     .connect()
-    .then(() => printLog("Connected successfuly", 'db'))
+    .then(() => printLog("Connected with database successfuly [2]", 'database'))
     .then(() =>
       client.query(`UPDATE public."inbox"
                     SET "lastSentAuthor"='${authorID}', "lastMessTime"='${sentAt}', "lastMessText"='${messTxt}'
 	                  WHERE "inboxID"='${inboxID}';`)
     )
-    .then(() => printLog(`Update data in inbox: ${inboxID}`))
-    .catch((e) => printLog(e, 'err'))
+    .then(() => printLog(`Data in inbox has updated: ${inboxID}`, 'database'))
+    .catch((e) => printLog("Cannot connected with database [2]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
 
