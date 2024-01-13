@@ -78,6 +78,3 @@ winston.loggers.add('dbFile', {
     new winston.transports.File({filename: './logs/database.log', level: 'database'}),
   ]
 });
-
-
-module.exports = loggersLevels.levels;

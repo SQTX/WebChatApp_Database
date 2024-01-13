@@ -1,5 +1,7 @@
 const winston = require('winston');   // Winston module
 
+require('./loggers');
+
 
 const allLevels = ['error', 'warn', 'debug', 'server', 'database', 'http', 'info']
 
