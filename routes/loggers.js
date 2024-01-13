@@ -1,6 +1,7 @@
 const winston = require('winston');   // Winston module
 const {combine, timestamp, printf, json, prettyPrint, errors} = winston.format;
 
+
 const loggersLevels = {
   levels: {
     error: 0,
@@ -24,6 +25,7 @@ const loggersLevels = {
 winston.addColors(loggersLevels.colors);
 
 
+// Logger to print data in console:
 winston.loggers.add('cliLogger', {
   levels: loggersLevels.levels,
   format: combine(
@@ -37,7 +39,7 @@ winston.loggers.add('cliLogger', {
   ]
 });
 
-
+// Loggers to save data in files:
 winston.loggers.add('allLoggerFile', {
   levels: loggersLevels.levels,
   format: combine(
