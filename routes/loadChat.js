@@ -21,9 +21,10 @@ function loadConversationPath(app, userID) {
       .then((results) => {
         const inbox = results.rows[0];
         const { inboxID } = inbox;
-        printLog(`Searching inbox with '${inboxID}' ID`, 'debug');
+        printLog(`Searching inbox with [friend ID] '${inboxID}' ID`, 'debug');
         loadMessagesFromConversation(app, inboxID);
         res.send({ inboxID: inboxID });
+        printLog(`Conversation with [friend ID] '${inboxID}' has loaded`, 'debug');
       })
       .catch((e) => printLog("Cannot connected with database [3]: ", 'error', new Error(e)))
       .finally(() => client.end());
@@ -112,7 +113,7 @@ function loadAllConversations(app) {
       for (let i = 0; i < conversationNumber; i++) {
         const { friendID } = friendsID[i];
         loadConversationPath(app, friendID);
-        printLog(`Conversation for userID '${friendID}' has loaded.`, 'debug');
+        printLog(`Conversation with [friend ID] '${friendID}' has loaded.`, 'debug');
       }
     })
     .catch((e) => printLog("Cannot connected with database [6]: ", 'error', new Error(e)))

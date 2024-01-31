@@ -62,7 +62,7 @@ function createConversation(userID, inboxID) {
       client.query(`INSERT INTO public."conversation"("userID", "friendID", "inboxID")
 	                  VALUES ('1', '${userID}', '${inboxID}');`)
     )
-    .then(() => printLog("Added new friend ('${userID}') to friend list", 'database'))
+    .then(() => printLog(`Added new friend ([friend ID] '${userID}') to friends list`, 'database'))
     .catch((e) => printLog("Cannot connected with database [9]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }

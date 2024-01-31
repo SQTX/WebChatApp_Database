@@ -16,7 +16,7 @@ function addNewMessageToDB(inboxID, authorID, sentAt, messTxt) {
       client.query(`INSERT INTO public."message"("inboxID", "authorID", "sentAt", "messTxt")
                     VALUES ('${inboxID}','${authorID}','${sentAt}','${messTxt}');`)
     )
-    .then(() => printLog("Add new message to database.", 'database'))
+    .then(() => printLog(`User [user ID] '${authorID}' has sent new message. Saved it in database`, 'database'))
     .catch((e) => printLog("Cannot connected with database [1]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
@@ -34,7 +34,7 @@ function updateInboxData(inboxID, authorID, sentAt, messTxt) {
                     SET "lastSentAuthor"='${authorID}', "lastMessTime"='${sentAt}', "lastMessText"='${messTxt}'
 	                  WHERE "inboxID"='${inboxID}';`)
     )
-    .then(() => printLog(`Data in inbox has updated: ${inboxID}`, 'database'))
+    .then(() => printLog(`Data in [user ID] '${authorID}''s inbox has updated: [friend ID] '${inboxID}'`, 'database'))
     .catch((e) => printLog("Cannot connected with database [2]: ", 'error', new Error(e)))
     .finally(() => client.end());
 }
